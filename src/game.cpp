@@ -1,6 +1,6 @@
 #include "game.hpp"
 
-Game::Game() : title{"Game"} {
+Game::Game() : title{"LoopCube"} {
 
 }
 
@@ -16,13 +16,13 @@ void Game::game_init() {
     camera = new Camera();
     camera->set_pos(view_x, view_y);
 
-    block = new Block(0, renderer, camera, 1, 0);
+    chunk = new Chunk(-4, renderer, camera);
 
 }
 
 // Game related loop stuff
 void Game::update() {
-    block->update();
+    chunk->updateAll();
 
     // Update camera position
     camera->set_pos(view_x, view_y);
@@ -31,7 +31,7 @@ void Game::update() {
 // Draw objects to screen
 void Game::render() {
     SDL_RenderClear(renderer);
-    block->render();
+    chunk->renderAll();
     SDL_RenderPresent(renderer);
 }
 
@@ -68,19 +68,19 @@ void Game::event_handler() {
     const Uint8* currentKeyStates = SDL_GetKeyboardState(NULL);
 
     if (currentKeyStates[SDL_SCANCODE_UP]) {
-        view_y--;
+        view_y -= 5;
     }
 
     if (currentKeyStates[SDL_SCANCODE_DOWN]) {
-        view_y++;
+        view_y += 5;
     }
 
     if (currentKeyStates[SDL_SCANCODE_LEFT]) {
-        view_x--;
+        view_x -= 5;
     }
 
     if (currentKeyStates[SDL_SCANCODE_RIGHT]) {
-        view_x++;
+        view_x += 5;
     }
 
     switch (event.type) {
@@ -103,7 +103,7 @@ void Game::free() {
         SDL_DestroyWindow(window);
         SDL_DestroyRenderer(renderer);
         delete camera;
-        delete block;
+        delete chunk;
         SDL_Quit();
     }
 

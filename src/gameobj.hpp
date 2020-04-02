@@ -8,7 +8,8 @@
 class Game_Object {
 
 public:
-    Game_Object(std::string image, SDL_Renderer* renderer, Camera* camera, double x, double y, double w, double h);
+    Game_Object();
+    Game_Object(std::string image, SDL_Renderer* renderer, Camera &camera, double x, double y, double w, double h);
     virtual ~Game_Object();
 
     virtual void update();

@@ -10,7 +10,7 @@
 #include "texture.hpp"
 #include "camera.hpp"
 #include "block.hpp"
-#include "chunk.hpp"
+#include "chunkgroup.hpp"
 
 
 class Game {
@@ -35,8 +35,9 @@ private:
 
     SDL_Window* window;
     SDL_Renderer* renderer;
-    Chunk* chunk;
-    Camera* camera;
+
+    Chunk_Group chunks;
+    Camera camera;
 
     double view_x = 0; // TEMP values for testing the camera
     double view_y = 0;

@@ -1,16 +1,19 @@
 #include "gameobj.hpp"
 
-Game_Object::Game_Object(std::string image, SDL_Renderer* renderer, Camera* camera,
+Game_Object::Game_Object() {}
+
+Game_Object::Game_Object(std::string image, SDL_Renderer* renderer, Camera &camera,
     double x, double y, double w, double h) : x_pos{x}, y_pos{y}, width{w}, height{h} {
     image_location = image;
     this->renderer = renderer;
-    this->camera = camera;
+    // Camera needs to be a pointer incase another object changes the camera
+    this->camera = &camera;
 
     texture = Texture::load(image.c_str(), renderer);
 }
 
 Game_Object::~Game_Object() {
-
+    camera = nullptr;
 }
 
 void Game_Object::update() {

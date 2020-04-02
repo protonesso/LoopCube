@@ -1,6 +1,8 @@
 #include "block.hpp"
 
-Block::Block(int id, SDL_Renderer* renderer, Camera* camera, int x, int y)
+Block::Block() {}
+
+Block::Block(int id, SDL_Renderer* renderer, Camera &camera, int x, int y)
     : Game_Object{"data/img/test.png", renderer, camera, (double)x, (double)y, block_w, block_h} {
     this->id = id;
 }

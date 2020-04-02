@@ -10,15 +10,15 @@
 class Chunk {
 
 public:
-    Chunk(int slot, SDL_Renderer* renderer, Camera* camera);
+    Chunk(int slot, SDL_Renderer* renderer, Camera &camera);
     ~Chunk();
 
-    void updateAll();
-    void renderAll();
-    void place_block(int id, int x, int y)
+    void update_all();
+    void render_all();
+    void place_block(int id, int x, int y);
 
 private:
-    std::array<Block*, 1024> chunk;
+    std::array<Block, 1024> chunk;
     int slot;
 
     SDL_Renderer* renderer;

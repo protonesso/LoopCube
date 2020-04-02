@@ -1,6 +1,6 @@
 #include "game.hpp"
 
-Game::Game() : title{"LoopCube"} {
+Game::Game() : title{"LoopCube"}, camera{} {
 
 }
 
@@ -13,25 +13,26 @@ Game::~Game() {
 // Initiates Game objects
 void Game::game_init() {
     // Configure camera
-    camera = new Camera();
-    camera->set_pos(view_x, view_y);
+    camera.set_pos(view_x, view_y);
 
-    chunk = new Chunk(-4, renderer, camera);
+    chunks = Chunk_Group(renderer, camera);
 
 }
 
 // Game related loop stuff
 void Game::update() {
-    chunk->updateAll();
+    chunks.update_all();
 
     // Update camera position
-    camera->set_pos(view_x, view_y);
+    camera.set_pos(view_x, view_y);
 }
 
 // Draw objects to screen
 void Game::render() {
     SDL_RenderClear(renderer);
-    chunk->renderAll();
+
+    chunks.render_all();
+
     SDL_RenderPresent(renderer);
 }
 
@@ -48,7 +49,7 @@ void Game::init(bool fullscreen = false) {
 
         window = SDL_CreateWindow(title, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 800, 600, flags);
         renderer = SDL_CreateRenderer(window, -1, 0);
-        SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+        SDL_SetRenderDrawColor(renderer, 100, 100, 100, 255);
     }
 
 
@@ -102,8 +103,6 @@ void Game::free() {
         std::cout << "Freeing..." << std::endl;
         SDL_DestroyWindow(window);
         SDL_DestroyRenderer(renderer);
-        delete camera;
-        delete chunk;
         SDL_Quit();
     }
 

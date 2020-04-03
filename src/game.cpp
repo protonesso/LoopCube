@@ -1,6 +1,6 @@
 #include "game.hpp"
 
-Game::Game() : title{"LoopCube"}, camera{} {
+Game::Game() : title{"LoopCube"}, camera{WINDOW_W, WINDOW_H} {
 
 }
 
@@ -22,6 +22,7 @@ void Game::game_init() {
 // Game related loop stuff
 void Game::update() {
     chunks.update_all();
+    chunks.check_area();
 
     // Update camera position
     camera.set_pos(view_x, view_y);
@@ -47,9 +48,9 @@ void Game::init(bool fullscreen = false) {
 
     if (SDL_Init(SDL_INIT_EVERYTHING) == 0) {
 
-        window = SDL_CreateWindow(title, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 800, 600, flags);
+        window = SDL_CreateWindow(title, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, WINDOW_W, WINDOW_H, flags);
         renderer = SDL_CreateRenderer(window, -1, 0);
-        SDL_SetRenderDrawColor(renderer, 100, 100, 100, 255);
+        SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
     }
 
 
@@ -69,11 +70,11 @@ void Game::event_handler() {
     const Uint8* currentKeyStates = SDL_GetKeyboardState(NULL);
 
     if (currentKeyStates[SDL_SCANCODE_UP]) {
-        view_y -= 5;
+        view_y += 5;
     }
 
     if (currentKeyStates[SDL_SCANCODE_DOWN]) {
-        view_y += 5;
+        view_y -= 5;
     }
 
     if (currentKeyStates[SDL_SCANCODE_LEFT]) {

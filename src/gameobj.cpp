@@ -16,6 +16,32 @@ Game_Object::~Game_Object() {
     camera = nullptr;
 }
 
+double Game_Object::get_default_x() {
+    return x_pos;
+}
+
+double Game_Object::get_default_y() {
+    return y_pos;
+}
+
+double Game_Object::get_x() {
+    return x_pos + (camera->get_x());
+}
+
+double Game_Object::get_y() {
+    return y_pos + (camera->get_y());
+}
+
+bool Game_Object::out_of_view() {
+    if (get_x()+width < 0 || get_y()+height < 0) {
+        return true;
+    }
+    if (get_x() > camera->get_width() || get_y() > camera->get_height()) {
+        return true;
+    }
+    return false;
+}
+
 void Game_Object::update() {
     src.h = height;
     src.w = width;
@@ -24,8 +50,8 @@ void Game_Object::update() {
 
     dest.h = src.h;
     dest.w = src.w;
-    dest.x = x_pos + (camera->get_x());
-    dest.y = y_pos + (camera->get_y());
+    dest.x = get_x();
+    dest.y = get_y();
 }
 
 void Game_Object::render() {

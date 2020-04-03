@@ -11,6 +11,15 @@ Block::~Block() {
 
 }
 
+double Block::get_x() {
+    return x_pos*width + (camera->get_x());
+}
+
+double Block::get_y() {
+    return y_pos*height + (camera->get_y());
+
+}
+
 void Block::update() {
     src.h = height;
     src.w = width;
@@ -19,6 +28,6 @@ void Block::update() {
 
     dest.h = src.h;
     dest.w = src.w;
-    dest.x = x_pos*width + (camera->get_x());
-    dest.y = y_pos*height + (camera->get_y());
+    dest.x = get_x();
+    dest.y = get_y();
 }

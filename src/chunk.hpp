@@ -2,7 +2,7 @@
 #define CHUNK_HPP
 #include <iostream>
 #include <array>
-#include "SDL2/SDL.h"
+#include <SDL2/SDL.h>
 
 #include "block.hpp"
 #include "camera.hpp"
@@ -16,6 +16,7 @@ public:
     void update_all();
     void render_all();
     void place_block(int id, int x, int y);
+    void generate_chunk();
 
 private:
     std::array<Block, 1024> chunk;

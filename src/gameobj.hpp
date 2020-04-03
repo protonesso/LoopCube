@@ -14,6 +14,14 @@ public:
 
     virtual void update();
     virtual void render();
+
+    virtual bool out_of_view();
+
+    // Return position
+    virtual double get_default_x();
+    virtual double get_default_y();
+    virtual double get_x();
+    virtual double get_y();
 protected:
     double x_pos;
     double y_pos;

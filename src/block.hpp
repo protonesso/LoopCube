@@ -11,6 +11,8 @@ public:
     ~Block();
 
     void update() override;
+    double get_x() override;
+    double get_y() override;
 private:
     int id;
 };

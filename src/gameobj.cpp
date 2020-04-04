@@ -2,18 +2,18 @@
 
 Game_Object::Game_Object() {}
 
-Game_Object::Game_Object(std::string image, SDL_Renderer* renderer, Camera &camera,
+Game_Object::Game_Object(int texture_id, TextureHandler &textures, SDL_Renderer* renderer, Camera &camera,
     double x, double y, double w, double h) : x_pos{x}, y_pos{y}, width{w}, height{h} {
-    image_location = image;
+    this->texture_id = texture_id;
     this->renderer = renderer;
     // Camera needs to be a pointer incase another object changes the camera
     this->camera = &camera;
-
-    texture = Texture::load(image.c_str(), renderer);
+    this->textures = &textures;
 }
 
 Game_Object::~Game_Object() {
-    camera = nullptr;
+    //std::cout << "Well shit man" << std::endl;
+    //SDL_DestroyTexture(texture);
 }
 
 double Game_Object::get_default_x() {
@@ -55,5 +55,5 @@ void Game_Object::update() {
 }
 
 void Game_Object::render() {
-    SDL_RenderCopy(renderer, texture, &src, &dest);
+    SDL_RenderCopy(renderer, textures->get_texture(texture_id), &src, &dest);
 }

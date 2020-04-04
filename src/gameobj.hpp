@@ -1,15 +1,15 @@
 #ifndef GAMEOBJ_HPP
 #define GAMEOBJ_HPP
-#include "texture.hpp"
+#include "texturehandler.hpp"
 #include "SDL2/SDL.h"
-#include "string"
+#include <string>
 #include "camera.hpp"
 
 class Game_Object {
 
 public:
     Game_Object();
-    Game_Object(std::string image, SDL_Renderer* renderer, Camera &camera, double x, double y, double w, double h);
+    Game_Object(int texture_id, TextureHandler &textures, SDL_Renderer* renderer, Camera &camera, double x, double y, double w, double h);
     virtual ~Game_Object();
 
     virtual void update();
@@ -27,11 +27,11 @@ protected:
     double y_pos;
     double width;
     double height;
-    std::string image_location;
+    int texture_id;
 
     SDL_Renderer* renderer;
     SDL_Rect src, dest;
-    SDL_Texture* texture;
+    TextureHandler* textures;
     Camera* camera;
 
 };

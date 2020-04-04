@@ -1,8 +1,8 @@
-FLAGS=-Wall -Wextra -lSDL2 -lSDL2_image
+FLAGS=-g -Wall -Wextra -lSDL2 -lSDL2_image
 CC=g++
 
-Debug: main.o game.o texture.o gameobj.o camera.o block.o chunk.o chunkgroup.o
-	$(CC) $(FLAGS) -o bin/Debug/LoopCube main.o game.o texture.o gameobj.o camera.o block.o chunk.o chunkgroup.o
+Debug: main.o game.o texture.o gameobj.o camera.o block.o chunk.o chunkgroup.o texturehandler.o
+	$(CC) $(FLAGS) -o bin/Debug/LoopCube main.o game.o texture.o gameobj.o camera.o block.o chunk.o chunkgroup.o texturehandler.o
 	mv *.o obj/Debug/src/
 
 main.o: src/main.cpp
@@ -28,6 +28,9 @@ chunk.o: src/chunk.cpp
 
 chunkgroup.o: src/chunkgroup.cpp
 	$(CC) $(FLAGS) -c src/chunkgroup.cpp
+
+texturehandler.o: src/texturehandler.cpp
+	$(CC) $(FLAGS) -c src/texturehandler.cpp
 
 cleanDebug:
 	rm -rf bin/Debug/LoopCube

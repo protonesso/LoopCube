@@ -6,11 +6,12 @@
 
 #include "chunk.hpp"
 #include "constants/blockids.hpp"
+#include "texturehandler.hpp"
 
 class Chunk_Group {
 public:
     Chunk_Group() = default;
-    Chunk_Group(SDL_Renderer* renderer, Camera &camera);
+    Chunk_Group(SDL_Renderer* renderer, Camera &camera, TextureHandler &textures);
     ~Chunk_Group();
 
     void generate_chunk(int id);
@@ -23,6 +24,7 @@ private:
 
     SDL_Renderer* renderer;
     Camera* camera;
+    TextureHandler* textures;
 };
 
 

@@ -7,8 +7,7 @@ class Block: public Game_Object {
 
 public:
     Block();
-    Block(int id, SDL_Renderer* renderer, Camera &camera, int x, int y);
-    ~Block();
+    Block(int id, TextureHandler &textures, SDL_Renderer* renderer, Camera &camera, int x, int y);
 
     void update() override;
     double get_x() override;

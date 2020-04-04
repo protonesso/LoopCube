@@ -1,11 +1,18 @@
 #ifndef TEXTURE_HPP
 #define TEXTURE_HPP
 #include <SDL2/SDL_image.h>
+#include <string>
 
 class Texture {
 
 public:
-    static SDL_Texture* load(const char* filename, SDL_Renderer* renderer);
+    Texture(SDL_Renderer* renderer, std::string filename);
+    ~Texture();
+
+    SDL_Texture* get_texture();
+
+private:
+    SDL_Texture* texture;
 };
 
 

@@ -2,13 +2,9 @@
 
 Block::Block() {}
 
-Block::Block(int id, SDL_Renderer* renderer, Camera &camera, int x, int y)
-    : Game_Object{"data/img/test.png", renderer, camera, (double)x, (double)y, block_w, block_h} {
+Block::Block(int id, TextureHandler &textures, SDL_Renderer* renderer, Camera &camera, int x, int y)
+    : Game_Object{id, textures, renderer, camera, (double)x, (double)y, block_w, block_h} {
     this->id = id;
-}
-
-Block::~Block() {
-
 }
 
 double Block::get_x() {

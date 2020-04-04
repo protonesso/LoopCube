@@ -12,10 +12,14 @@ Game::~Game() {
 // Game related stuff below
 // Initiates Game objects
 void Game::game_init() {
+
+    srand(time(NULL));
     // Configure camera
     camera.set_pos(view_x, view_y);
 
-    chunks = Chunk_Group(renderer, camera);
+    textures = TextureHandler(renderer);
+    chunks = Chunk_Group(renderer, camera, textures);
+
 
 }
 
@@ -50,7 +54,7 @@ void Game::init(bool fullscreen = false) {
 
         window = SDL_CreateWindow(title, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, WINDOW_W, WINDOW_H, flags);
         renderer = SDL_CreateRenderer(window, -1, 0);
-        SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+        SDL_SetRenderDrawColor(renderer, 0x79, 0xae, 0xd9, 255);
     }
 
 
@@ -70,19 +74,19 @@ void Game::event_handler() {
     const Uint8* currentKeyStates = SDL_GetKeyboardState(NULL);
 
     if (currentKeyStates[SDL_SCANCODE_UP]) {
-        view_y += 5;
+        view_y += 10;
     }
 
     if (currentKeyStates[SDL_SCANCODE_DOWN]) {
-        view_y -= 5;
+        view_y -= 10;
     }
 
     if (currentKeyStates[SDL_SCANCODE_LEFT]) {
-        view_x -= 5;
+        view_x -= 10;
     }
 
     if (currentKeyStates[SDL_SCANCODE_RIGHT]) {
-        view_x += 5;
+        view_x += 10;
     }
 
     switch (event.type) {

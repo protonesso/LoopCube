@@ -1,6 +1,6 @@
 #include "chunk.hpp"
 
-Chunk::Chunk(int slot, SDL_Renderer* renderer, TextureHandler &textures, Camera &camera) {
+Chunk::Chunk(int slot, SDL_Renderer* renderer, TextureHandler &textures, Camera &camera) : MAX_WIDTH{8}, MAX_HEIGHT{128} {
     this->renderer = renderer;
     this->camera = &camera;
     this->textures = &textures;
@@ -24,21 +24,19 @@ int Chunk::get_slot() {
 }
 
 void Chunk::generate_chunk() {
-    size_t chunk_width = chunk.size()/128;
-    size_t chunk_height = chunk.size()/8;
     int i = 0;
 
     // Seed chunk
 
-    for (size_t x = 0; x < chunk_width; ++x) {
-        for (size_t y = 0; y < chunk_height; ++y) {
+    for (int x = 0; x < MAX_WIDTH; ++x) {
+        for (int y = 0; y < MAX_HEIGHT; ++y) {
             if (y == 0) {
-                chunk[i] = Block(0, *textures, renderer, *camera, x+(slot*chunk_width), y);
-            } else if (y >= 1 && y <= 3) {
-                chunk[i] = Block(1, *textures, renderer, *camera, x+(slot*chunk_width), y+(rand() % 3));
-            } else {
-                chunk[i] = Block(2, *textures, renderer, *camera, x+(slot*chunk_width), y);
 
+                place_block(0, x, y);
+            } else if (y >= 1 && y <= 3) {
+                place_block(1, x, y);
+            } else {
+                place_block(2, x, y);
             }
             i++;
         }
@@ -47,9 +45,12 @@ void Chunk::generate_chunk() {
 }
 
 void Chunk::place_block(int id, int x, int y) {
-    // TODO
-    // Need to declare these to get rid of warnings
-    std::cout << id << x << y << std::endl;
+    Block temp_block{id, *textures, renderer, *camera, x+(slot*MAX_WIDTH), y};
+    if ((int)chunk.size()+1 < MAX_HEIGHT*MAX_WIDTH || x < 8 || x > 0 || y < 128 || y > 0) {
+        chunk.push_back(temp_block);
+    } else {
+        std::cerr << "[ERROR] Block placed too far" << std::endl;
+    }
 
 }
 

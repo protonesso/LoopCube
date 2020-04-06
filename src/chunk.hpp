@@ -26,7 +26,9 @@ public:
     int get_slot();
 
 private:
-    std::array<Block, 1024> chunk;
+    int MAX_WIDTH;
+    int MAX_HEIGHT;
+    std::vector<Block> chunk;
     int slot;
 
     SDL_Renderer* renderer;

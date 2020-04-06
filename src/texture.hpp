@@ -10,6 +10,7 @@ public:
     ~Texture();
 
     SDL_Texture* get_texture();
+    void free_texture();
 
 private:
     SDL_Texture* texture;

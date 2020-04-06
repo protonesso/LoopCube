@@ -8,10 +8,13 @@ Texture::Texture(SDL_Renderer* renderer, std::string filename) {
     this->texture = texture;
 }
 
+Texture::~Texture() {
+}
+
 SDL_Texture* Texture::get_texture() {
     return texture;
 }
 
-Texture::~Texture() {
-   // SDL_DestroyTexture(texture);
+void Texture::free_texture() {
+    SDL_DestroyTexture(texture);
 }

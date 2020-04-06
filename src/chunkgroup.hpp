@@ -8,6 +8,7 @@
 #include "constants/blockids.hpp"
 #include "texturehandler.hpp"
 
+// TODO non-important Rename this properly
 class Chunk_Group {
 public:
     Chunk_Group() = default;

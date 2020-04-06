@@ -26,6 +26,9 @@ public:
     int get_slot();
 
 private:
+    int get_chunk_x(int x);
+    int get_chunk_max_size();
+
     int MAX_WIDTH;
     int MAX_HEIGHT;
     std::vector<Block> chunk;

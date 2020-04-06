@@ -18,7 +18,6 @@ void Chunk_Group::generate_chunk(int id) {
         group.push_back(temp_chunk);
 
         loaded_chunks.push_back(id);
-        std::cout << "Generated chunk at " << id << std::endl;
     }
 }
 
@@ -46,12 +45,10 @@ void Chunk_Group::check_area() {
         if (id-surrounding-1 < loaded_chunks[0]) {
             loaded_chunks.erase(loaded_chunks.end()-1);
             group.erase(group.end()-1);
-            std::cout << "Rightmost gone" << std::endl;
         }
         if (id+surrounding > loaded_chunks[loaded_chunks.size()-1]) {
             loaded_chunks.erase(loaded_chunks.begin());
             group.erase(group.begin());
-            std::cout << "Leftmost gone" << std::endl;
         }
     }
 

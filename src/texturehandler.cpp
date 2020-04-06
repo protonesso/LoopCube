@@ -9,8 +9,12 @@ TextureHandler::TextureHandler(SDL_Renderer* renderer) {
     }
 }
 
-TextureHandler::~TextureHandler() {
-    // Delete all textures
+TextureHandler::~TextureHandler() {}
+
+void TextureHandler::free_textures() {
+    for (auto &i: textures) {
+        i.second.free_texture();
+    }
 }
 
 SDL_Texture* TextureHandler::get_texture(int id) {

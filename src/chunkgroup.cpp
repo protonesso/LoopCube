@@ -1,10 +1,10 @@
 #include "chunkgroup.hpp"
 
-Chunk_Group::Chunk_Group(SDL_Renderer* renderer, Camera &camera, TextureHandler &textures) {
+Chunk_Group::Chunk_Group(unsigned long seed, SDL_Renderer* renderer, Camera &camera, TextureHandler &textures) {
     this->renderer = renderer;
     this->camera = &camera;
     this->textures = &textures;
-    // Temporary test; rendering 5 chunks
+    this->seed = seed;
 }
 
 Chunk_Group::~Chunk_Group() {
@@ -14,7 +14,7 @@ Chunk_Group::~Chunk_Group() {
 void Chunk_Group::generate_chunk(int id) {
     // Generate the chunk if it hasn't been generated before
     if (std::find(loaded_chunks.begin(), loaded_chunks.end(), id) == loaded_chunks.end()) {
-        Chunk temp_chunk(id, renderer, *textures, *camera);
+        Chunk temp_chunk(seed, id, renderer, *textures, *camera);
         group.push_back(temp_chunk);
 
         loaded_chunks.push_back(id);
@@ -22,7 +22,7 @@ void Chunk_Group::generate_chunk(int id) {
 }
 
 void Chunk_Group::check_area() {
-    const int surrounding = 5; // surroundings
+    const int surrounding = 8; // surroundings
 
     double id = 0;
     id = ceil(camera->get_x() / (8 * block_w));

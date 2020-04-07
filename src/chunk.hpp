@@ -6,14 +6,16 @@
 #include <time.h>
 #include <SDL2/SDL.h>
 
+#include "constants/blockids.hpp"
 #include "block.hpp"
+#include "math/perlin.hpp"
 #include "camera.hpp"
 #include "texturehandler.hpp"
 
 class Chunk {
 
 public:
-    Chunk(int slot, SDL_Renderer* renderer, TextureHandler &texture, Camera &camera);
+    Chunk(unsigned long int seed, int slot, SDL_Renderer* renderer, TextureHandler &texture, Camera &camera);
     ~Chunk();
     // For std::sort
     bool operator<(const Chunk &c);
@@ -33,6 +35,7 @@ private:
     int MAX_HEIGHT;
     std::vector<Block> chunk;
     int slot;
+    PerlinNoise terrain_gen;
 
     SDL_Renderer* renderer;
     TextureHandler* textures;

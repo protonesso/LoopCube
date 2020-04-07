@@ -6,9 +6,7 @@
 #include <string>
 #include <vector>
 
-#include <cstdlib>
-#include <time.h>
-
+#include "constants/blockids.hpp"
 #include "gameobj.hpp"
 #include "texturehandler.hpp"
 #include "camera.hpp"
@@ -44,7 +42,7 @@ private:
     Camera camera;
 
     double view_x = 0; // TEMP values for testing the camera
-    double view_y = 0;
+    double view_y = (30*block_h)*-1;
 
 };
 

@@ -12,7 +12,7 @@
 class Chunk_Group {
 public:
     Chunk_Group() = default;
-    Chunk_Group(SDL_Renderer* renderer, Camera &camera, TextureHandler &textures);
+    Chunk_Group(unsigned long int seed, SDL_Renderer* renderer, Camera &camera, TextureHandler &textures);
     ~Chunk_Group();
 
     void generate_chunk(int id);
@@ -22,6 +22,7 @@ public:
 private:
     std::vector<Chunk> group;
     std::vector<int> loaded_chunks;
+    unsigned long seed;
 
     SDL_Renderer* renderer;
     Camera* camera;

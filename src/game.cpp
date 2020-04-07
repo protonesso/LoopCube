@@ -12,13 +12,12 @@ Game::~Game() {
 // Game related stuff below
 // Initiates Game objects
 void Game::game_init() {
-
-    srand(time(NULL));
+    unsigned long int seed = 16;
     // Configure camera
     camera.set_pos(view_x, view_y);
 
     textures = TextureHandler(renderer);
-    chunks = Chunk_Group(renderer, camera, textures);
+    chunks = Chunk_Group(seed, renderer, camera, textures);
 
 
 }

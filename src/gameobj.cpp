@@ -33,10 +33,10 @@ double Game_Object::get_y() {
 }
 
 bool Game_Object::out_of_view() {
-    if (get_x()+width < 0 || get_y()+height < 0) {
+    if (get_x()+(width*2) < 0 || get_y()+(height*2) < 0) {
         return true;
     }
-    if (get_x() > camera->get_width() || get_y() > camera->get_height()) {
+    if (get_x()-width > camera->get_width() || get_y()-height > camera->get_height()) {
         return true;
     }
     return false;

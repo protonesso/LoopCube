@@ -33,27 +33,23 @@ int Chunk::get_slot() {
 
 void Chunk::generate_chunk() {
     for (int x = 0; x < MAX_WIDTH; ++x) {
-        for (int y = 0; y < MAX_HEIGHT; ++y) {
-            /*if (y == 0) {
-                place_block(0, x, y);
-            } else if (y >= 1 && y <= 3) {
-                place_block(1, x, y+(rand()%MAX_HEIGHT));
-            } else {
-                place_block(2, x, y);
-            }*/
-        }
         double d_x = (double)x/(double)MAX_WIDTH;
-        //double d_y = (double)y/(double)MAX_HEIGHT;
+
+        // Generate world
         int temp = floor(terrain_gen.noise(d_x+(slot), 0)*10);
 
         int offset = 30;
         for (int y = 0; y < MAX_HEIGHT-temp-offset; ++y) {
+            double d_y = (double)y/(double)MAX_HEIGHT;
             if (y == 0) {
                 place_block(0, x, y+temp+offset);
             } else if (y >= 1 && y <= 3) {
                 place_block(1, x, y+temp+offset);
             } else {
-                place_block(2, x, y+temp+offset);
+                int cave_noise = terrain_gen.noise(d_x/2+(slot), d_y*12)*400;
+                if (cave_noise < 150 && cave_noise > -150) {
+                    place_block(2, x, y+temp+offset);
+                }
             }
         }
     }

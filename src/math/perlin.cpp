@@ -6,6 +6,7 @@ PerlinNoise::PerlinNoise(unsigned long int seed) {
     std::iota(permutation.begin(), permutation.end(), 0);
     std::default_random_engine rng{seed};
     std::shuffle(permutation.begin(), permutation.end(), rng);
+    permutation.insert(permutation.end(), permutation.begin(), permutation.end());
 }
 
 PerlinNoise::~PerlinNoise() {
@@ -35,7 +36,7 @@ double PerlinNoise::noise(double x, double y, double z) {
                                     grad(permutation[BA+1], x-1, y, z-1 )),
                             lerp(u, grad(permutation[AB+1], x, y-1, z-1 ),
                                     grad(permutation[BB+1], x-1, y-1, z-1 ))));
-    return (result + 1.0)/2.0;
+    return result;
 }
 
 double PerlinNoise::fade(double t) {

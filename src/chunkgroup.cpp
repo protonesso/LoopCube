@@ -11,6 +11,10 @@ Chunk_Group::~Chunk_Group() {
 
 }
 
+std::vector<Chunk>* Chunk_Group::get_chunks() {
+    return &group;
+}
+
 void Chunk_Group::generate_chunk(int id) {
     // Generate the chunk if it hasn't been generated before
     if (std::find(loaded_chunks.begin(), loaded_chunks.end(), id) == loaded_chunks.end()) {

@@ -7,11 +7,11 @@ Block::Block(int id, TextureHandler &textures, SDL_Renderer* renderer, Camera &c
     this->id = id;
 }
 
-double Block::get_x() {
+double Block::get_x() const {
     return x_pos*width + (camera->get_x());
 }
 
-double Block::get_y() {
+double Block::get_y() const {
     return y_pos*height + (camera->get_y());
 
 }

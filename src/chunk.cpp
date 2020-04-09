@@ -31,6 +31,10 @@ int Chunk::get_slot() {
     return slot;
 }
 
+std::vector<Block>* Chunk::get_chunk() {
+    return &chunk;
+}
+
 void Chunk::generate_chunk() {
     for (int x = 0; x < MAX_WIDTH; ++x) {
         double d_x = (double)x/(double)MAX_WIDTH;
@@ -46,7 +50,7 @@ void Chunk::generate_chunk() {
             } else if (y >= 1 && y <= 3) {
                 place_block(1, x, y+temp+offset);
             } else {
-                int cave_noise = terrain_gen.noise(d_x/2+(slot), d_y*12)*400;
+                int cave_noise = terrain_gen.noise(d_x+(slot), d_y*12)*400;
                 if (cave_noise < 150 && cave_noise > -150) {
                     place_block(2, x, y+temp+offset);
                 }

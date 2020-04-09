@@ -19,6 +19,8 @@ public:
     void check_area();
     void render_all();
     void update_all();
+
+    std::vector<Chunk>* get_chunks();
 private:
     std::vector<Chunk> group;
     std::vector<int> loaded_chunks;

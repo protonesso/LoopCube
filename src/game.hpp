@@ -7,11 +7,11 @@
 #include <vector>
 
 #include "constants/blockids.hpp"
-#include "gameobj.hpp"
 #include "texturehandler.hpp"
 #include "camera.hpp"
 #include "block.hpp"
 #include "chunkgroup.hpp"
+#include "player/player.hpp"
 
 
 class Game {
@@ -29,10 +29,11 @@ public:
     void free();
 private:
     const char* title;
-    const int WINDOW_W = 1400;
+    const int WINDOW_W = 800;
     const int WINDOW_H = 600;
     bool has_freed = false;
     bool is_running = false;
+    void handle_camera();
 
     SDL_Window* window;
     SDL_Renderer* renderer;
@@ -40,6 +41,7 @@ private:
 
     Chunk_Group chunks;
     Camera camera;
+    Player player;
 
     double view_x = 0; // TEMP values for testing the camera
     double view_y = (30*block_h)*-1;

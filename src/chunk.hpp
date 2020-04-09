@@ -27,6 +27,9 @@ public:
 
     int get_slot();
 
+    // Need to be able to view the chunk to do stuff such as collision detection
+    std::vector<Block>* get_chunk();
+
 private:
     int get_chunk_x(int x);
     int get_chunk_max_size();

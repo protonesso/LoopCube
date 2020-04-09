@@ -4,13 +4,23 @@
 #include <utility>
 #include <string>
 
+// NOTE maybe move to texture.cpp?
 const std::string path = "data/img/";
+/*
+    Blocks = 0x0 ... 0xF9F
+    Sprites = 0xFA0 ... 0xFFF
+*/
 const std::vector<std::pair<int, std::string>> ids = {
     {0, "grass"},
     {1, "dirt"},
     {2, "stone"},
-    {3, "wood"}
+    {3, "wood"},
+    {0xFA0, "player"}
 };
+const int block_start = 0;
+const int sprite_start = 0xFA0;
+
+// TODO move to block.hpp
 const double block_w = 32;
 const double block_h = 32;
 

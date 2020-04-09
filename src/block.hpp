@@ -9,9 +9,9 @@ public:
     Block();
     Block(int id, TextureHandler &textures, SDL_Renderer* renderer, Camera &camera, int x, int y);
 
-    void update() override;
-    double get_x() override;
-    double get_y() override;
+    void update();
+    double get_x() const override;
+    double get_y() const override;
 private:
     int id;
 };

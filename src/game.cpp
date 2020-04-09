@@ -12,9 +12,10 @@ Game::~Game() {
 // Game related stuff below
 // Initiates Game objects
 void Game::game_init() {
-    unsigned long int seed = 16;
+    unsigned long int seed = 1;
     // Configure camera
-    camera.set_pos(view_x, view_y);
+    player = Player(textures, renderer, camera);
+    camera.set_pos(0, -45*block_h);
 
     textures = TextureHandler(renderer);
     chunks = Chunk_Group(seed, renderer, camera, textures);
@@ -24,11 +25,21 @@ void Game::game_init() {
 
 // Game related loop stuff
 void Game::update() {
+
+    // Update player
+    player.update(chunks);
+    // Update camera
+    handle_camera();
+
+    // Update all chunks
     chunks.update_all();
     chunks.check_area();
+}
 
-    // Update camera position
-    camera.set_pos(view_x, view_y);
+void Game::handle_camera() {
+    double x = (player.get_default_x()*-1 + (WINDOW_W/2)) - player.get_width()/2;
+    double y = player.get_default_y()*-1 + (WINDOW_H/2) - player.get_height()/2;
+    camera.set_pos(x, y);
 }
 
 // Draw objects to screen
@@ -36,6 +47,7 @@ void Game::render() {
     SDL_RenderClear(renderer);
 
     chunks.render_all();
+    player.render();
 
     SDL_RenderPresent(renderer);
 }
@@ -73,19 +85,19 @@ void Game::event_handler() {
     const Uint8* currentKeyStates = SDL_GetKeyboardState(NULL);
 
     if (currentKeyStates[SDL_SCANCODE_UP]) {
-        view_y += 10;
+        player.direct_player(0, chunks);
     }
 
     if (currentKeyStates[SDL_SCANCODE_DOWN]) {
-        view_y -= 10;
+        player.direct_player(2, chunks);
     }
 
     if (currentKeyStates[SDL_SCANCODE_LEFT]) {
-        view_x -= 10;
+        player.direct_player(3, chunks);
     }
 
     if (currentKeyStates[SDL_SCANCODE_RIGHT]) {
-        view_x += 10;
+        player.direct_player(1, chunks);
     }
 
     switch (event.type) {

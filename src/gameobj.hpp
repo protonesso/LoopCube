@@ -2,6 +2,7 @@
 #define GAMEOBJ_HPP
 #include "texturehandler.hpp"
 #include "constants/blockids.hpp"
+#include "position.hpp"
 #include "SDL2/SDL.h"
 #include <string>
 #include "camera.hpp"
@@ -26,17 +27,13 @@ public:
     virtual double get_width() const;
     virtual double get_height() const;
 
-    virtual const SDL_Rect* get_src() const;
+    virtual const Position* get_obj() const;
 
-    friend bool operator==(const Game_Object &obj1, const Game_Object &obj2);
-    friend bool operator!=(const Game_Object &obj1, const Game_Object &obj2);
+    bool is_colliding(const Game_Object &obj2);
 protected:
-    double x_pos;
-    double y_pos;
-    double width;
-    double height;
     int texture_id;
 
+    Position obj;
     SDL_Renderer* renderer;
     SDL_Rect src, dest;
     TextureHandler* textures;

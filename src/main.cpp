@@ -13,9 +13,9 @@ int main() {
     while(game->running()) {
         frame = SDL_GetTicks();
 
-        game->event_handler();
         game->update();
         game->render();
+        game->event_handler();
 
         frame_time = SDL_GetTicks() - frame;
 

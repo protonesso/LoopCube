@@ -8,17 +8,17 @@ Block::Block(int id, TextureHandler &textures, SDL_Renderer* renderer, Camera &c
 }
 
 double Block::get_x() const {
-    return x_pos*width + (camera->get_x());
+    return obj.x*obj.w + (camera->get_x());
 }
 
 double Block::get_y() const {
-    return y_pos*height + (camera->get_y());
+    return obj.y*obj.h + (camera->get_y());
 
 }
 
 void Block::update() {
-    src.h = height;
-    src.w = width;
+    src.h = obj.h;
+    src.w = obj.w;
     src.x = 0;
     src.y = 0;
 

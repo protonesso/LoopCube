@@ -27,3 +27,19 @@ void Block::update() {
     dest.x = get_x();
     dest.y = get_y();
 }
+
+void Block::render() {
+    render_shadow(); // Note: When settings menu added, add option to disable shadow, it can be resource hungry
+    SDL_RenderCopy(renderer, textures->get_texture(texture_id), &src, &dest);
+}
+
+void Block::render_shadow() {
+    SDL_Rect shadow;
+    shadow.x = dest.x + 10;
+    shadow.y = dest.y + 10;
+    shadow.w = obj.w;
+    shadow.h = obj.h;
+
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 40);
+    SDL_RenderFillRect(renderer, &shadow);
+}

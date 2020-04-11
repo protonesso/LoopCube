@@ -1,11 +1,12 @@
 #ifndef GAMEOBJ_HPP
 #define GAMEOBJ_HPP
-#include "texturehandler.hpp"
-#include "constants/blockids.hpp"
-#include "position.hpp"
 #include "SDL2/SDL.h"
 #include <string>
-#include "camera.hpp"
+
+#include "../texture/texturehandler.hpp"
+#include "../constants/blockids.hpp"
+#include "position.hpp"
+#include "../camera/camera.hpp"
 
 class Game_Object {
 

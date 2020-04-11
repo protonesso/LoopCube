@@ -1,7 +1,7 @@
 #include "player.hpp"
 
 Player::Player(TextureHandler &textures, SDL_Renderer* renderer, Camera &camera)
-    : Game_Object{0xFA0, textures, renderer, camera, 0, 0, 30, 58}, vel_x{0}, vel_y{5}, vel_x_speed{1} {
+    : Game_Object{0xFA0, textures, renderer, camera, 0, 0, 30, 58}, vel_x{0}, vel_y{0}, vel_x_speed{2} {
 
 }
 
@@ -31,7 +31,7 @@ bool Player::check_block_collision(Chunk_Group &chunks) {
 void Player::jump(Chunk_Group &chunks) {
     obj.y += 3;
     if (check_block_collision(chunks)) {
-        vel_y = -15;
+        vel_y = -14;
     }
     obj.y -= 3;
 }
@@ -54,9 +54,17 @@ void Player::direct_player(int direction, Chunk_Group chunks) {
     }
 }
 
+double Player::get_vel_x() const {
+    return vel_x;
+}
+
+double Player::get_vel_y() const {
+    return vel_y;
+}
+
 void Player::update(Chunk_Group &chunks) {
     // TODO possibly change engine code, player sometimes gets stuck in a wall
-    vel_x *= 0.85;
+    vel_x *= 0.75;
     obj.x += vel_x;
 
 
@@ -65,7 +73,7 @@ void Player::update(Chunk_Group &chunks) {
         vel_x = 0;
     }
 
-    vel_y += 1;
+    vel_y += .7;
     obj.y += vel_y;
 
     if (check_block_collision(chunks)) {

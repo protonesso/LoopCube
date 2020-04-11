@@ -1,12 +1,12 @@
 #ifndef TEXTUREHANDLER_HPP
 #define TEXTUREHANDLER_HPP
-#include "texture.hpp"
-#include "constants/blockids.hpp"
 #include <algorithm>
 #include <vector>
 #include <utility>
-
 #include <SDL2/SDL.h>
+
+#include "texture.hpp"
+#include "../constants/blockids.hpp"
 
 class TextureHandler {
 

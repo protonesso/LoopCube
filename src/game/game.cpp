@@ -25,15 +25,17 @@ void Game::game_init() {
 
 // Game related loop stuff
 void Game::update() {
-
-    // Update player
-    player.update(chunks);
-    // Update camera
-    handle_camera();
-
     // Update all chunks
     chunks.update_all();
     chunks.check_area();
+    SDL_SetRenderDrawColor(renderer, 0x79, 0xae, 0xd9, 255);
+
+    // Update player
+    player.update(chunks);
+
+    // Update camera
+    handle_camera();
+
 }
 
 void Game::handle_camera() {
@@ -62,10 +64,10 @@ void Game::init(bool fullscreen = false) {
     }
 
     if (SDL_Init(SDL_INIT_EVERYTHING) == 0) {
-
         window = SDL_CreateWindow(title, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, WINDOW_W, WINDOW_H, flags);
         renderer = SDL_CreateRenderer(window, -1, 0);
         SDL_SetRenderDrawColor(renderer, 0x79, 0xae, 0xd9, 255);
+        SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
     }
 
 

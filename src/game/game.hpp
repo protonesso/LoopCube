@@ -6,12 +6,11 @@
 #include <string>
 #include <vector>
 
-#include "constants/blockids.hpp"
-#include "texturehandler.hpp"
-#include "camera.hpp"
-#include "block.hpp"
-#include "chunkgroup.hpp"
-#include "player/player.hpp"
+#include "../constants/blockids.hpp"
+#include "../texture/texturehandler.hpp"
+#include "../camera/camera.hpp"
+#include "../chunk/chunkgroup.hpp"
+#include "../gameobject/player.hpp"
 
 
 class Game {

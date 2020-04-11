@@ -5,8 +5,8 @@
 #include <algorithm>
 
 #include "chunk.hpp"
-#include "constants/blockids.hpp"
-#include "texturehandler.hpp"
+#include "../constants/blockids.hpp"
+#include "../texture/texturehandler.hpp"
 
 // TODO non-important Rename this properly
 class Chunk_Group {

@@ -6,11 +6,11 @@
 #include <time.h>
 #include <SDL2/SDL.h>
 
-#include "constants/blockids.hpp"
-#include "block.hpp"
-#include "math/perlin.hpp"
-#include "camera.hpp"
-#include "texturehandler.hpp"
+#include "../constants/blockids.hpp"
+#include "../gameobject/block.hpp"
+#include "../math/perlin.hpp"
+#include "../camera/camera.hpp"
+#include "../texture/texturehandler.hpp"
 
 class Chunk {
 

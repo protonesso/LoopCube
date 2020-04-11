@@ -3,6 +3,6 @@
 #include <iostream>
 #include <SDL2/SDL.h>
 
-#include "game.hpp"
+#include "game/game.hpp"
 
 #endif // MAIN_HPP

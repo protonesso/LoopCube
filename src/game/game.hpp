@@ -8,10 +8,7 @@
 
 #include "../constants/blockids.hpp"
 #include "../texture/texturehandler.hpp"
-#include "../camera/camera.hpp"
-#include "../chunk/chunkgroup.hpp"
-#include "../gameobject/player.hpp"
-
+#include "play.hpp"
 
 class Game {
 
@@ -32,19 +29,11 @@ private:
     const int WINDOW_H = 600;
     bool has_freed = false;
     bool is_running = false;
-    void handle_camera();
 
+    Play* game;
     SDL_Window* window;
     SDL_Renderer* renderer;
     TextureHandler textures;
-
-    Chunk_Group chunks;
-    Camera camera;
-    Player player;
-
-    double view_x = 0; // TEMP values for testing the camera
-    double view_y = (30*block_h)*-1;
-
 };
 
 

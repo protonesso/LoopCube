@@ -6,7 +6,6 @@ Camera::Camera(int width, int height) {
 }
 
 Camera::~Camera() {
-    std::cout << "Camera deleted" << std::endl;
 }
 
 void Camera::set_pos(double x, double y) {

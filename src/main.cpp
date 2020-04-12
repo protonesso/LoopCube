@@ -6,16 +6,16 @@ int main() {
     Uint32 frame;
     int frame_time;
 
-    Game* game = new Game();
+    Game game{};
 
-    game->init(false);
+    game.init(false);
 
-    while(game->running()) {
+    while(game.running()) {
         frame = SDL_GetTicks();
 
-        game->update();
-        game->render();
-        game->event_handler();
+        game.update();
+        game.render();
+        game.event_handler();
 
         frame_time = SDL_GetTicks() - frame;
 
@@ -23,9 +23,7 @@ int main() {
             SDL_Delay(frame_del - frame_time);
         }
     }
-    game->free();
-
-    delete game;
+    game.free();
 
     return 0;
 }

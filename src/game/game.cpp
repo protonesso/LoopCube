@@ -1,6 +1,6 @@
 #include "game.hpp"
 
-Game::Game() : title{"LoopCube"}, camera{WINDOW_W, WINDOW_H} {
+Game::Game() : title{"LoopCube"} {
 
 }
 
@@ -12,44 +12,22 @@ Game::~Game() {
 // Game related stuff below
 // Initiates Game objects
 void Game::game_init() {
-    unsigned long int seed = 1;
-    // Configure camera
-    player = Player(textures, renderer, camera);
-    camera.set_pos(0, -45*block_h);
-
-    textures = TextureHandler(renderer);
-    chunks = Chunk_Group(seed, renderer, camera, textures);
-
-
+    game = new Play(renderer, textures, WINDOW_W, WINDOW_H);
 }
 
 // Game related loop stuff
 void Game::update() {
-    // Update all chunks
-    chunks.update_all();
-    chunks.check_area();
-    SDL_SetRenderDrawColor(renderer, 0x79, 0xae, 0xd9, 255);
-
-    // Update player
-    player.update(chunks);
-
-    // Update camera
-    handle_camera();
+    game->update();
 
 }
 
-void Game::handle_camera() {
-    double x = (player.get_default_x()*-1 + (WINDOW_W/2)) - player.get_width()/2;
-    double y = player.get_default_y()*-1 + (WINDOW_H/2) - player.get_height()/2;
-    camera.set_pos(x, y);
-}
+
 
 // Draw objects to screen
 void Game::render() {
     SDL_RenderClear(renderer);
 
-    chunks.render_all();
-    player.render();
+    game->render();
 
     SDL_RenderPresent(renderer);
 }
@@ -64,10 +42,13 @@ void Game::init(bool fullscreen = false) {
     }
 
     if (SDL_Init(SDL_INIT_EVERYTHING) == 0) {
+        std::cout << "[SDL] Initialized SDL" << std::endl;
         window = SDL_CreateWindow(title, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, WINDOW_W, WINDOW_H, flags);
         renderer = SDL_CreateRenderer(window, -1, 0);
         SDL_SetRenderDrawColor(renderer, 0x79, 0xae, 0xd9, 255);
         SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
+    } else {
+        std::cerr << "[SDL] ERROR: Failed to initialize SDL!" << std::endl;
     }
 
 
@@ -87,19 +68,15 @@ void Game::event_handler() {
     const Uint8* currentKeyStates = SDL_GetKeyboardState(NULL);
 
     if (currentKeyStates[SDL_SCANCODE_UP]) {
-        player.direct_player(0, chunks);
     }
 
     if (currentKeyStates[SDL_SCANCODE_DOWN]) {
-        player.direct_player(2, chunks);
     }
 
     if (currentKeyStates[SDL_SCANCODE_LEFT]) {
-        player.direct_player(3, chunks);
     }
 
     if (currentKeyStates[SDL_SCANCODE_RIGHT]) {
-        player.direct_player(1, chunks);
     }
 
     switch (event.type) {

@@ -2,8 +2,8 @@
 FLAGS=-Wall -Wextra -lSDL2 -lSDL2_image
 CXX=g++
 
-Debug: main.o game.o texture.o gameobj.o camera.o block.o chunk.o chunkgroup.o texturehandler.o perlin.o player.o
-	$(CXX) $(FLAGS) -o bin/Debug/LoopCube main.o game.o texture.o gameobj.o camera.o block.o chunk.o chunkgroup.o texturehandler.o perlin.o player.o
+Debug: main.o game.o texture.o gameobj.o camera.o block.o chunk.o chunkgroup.o texturehandler.o perlin.o player.o play.o
+	$(CXX) $(FLAGS) -o bin/Debug/LoopCube main.o game.o texture.o gameobj.o camera.o block.o chunk.o chunkgroup.o texturehandler.o perlin.o player.o play.o
 	mv *.o obj/Debug/src/
 
 main.o: src/main.cpp
@@ -38,6 +38,9 @@ perlin.o: src/math/perlin.cpp
 
 player.o: src/gameobject/player.cpp
 	$(CXX) $(FLAGS) -c src/gameobject/player.cpp
+
+play.o: src/game/play.cpp
+	$(CXX) $(FLAGS) -c src/game/play.cpp
 
 cleanDebug:
 	rm -rf bin/Debug/LoopCube

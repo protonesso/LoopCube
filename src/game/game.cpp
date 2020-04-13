@@ -12,7 +12,7 @@ Game::~Game() {
 // Game related stuff below
 // Initiates Game objects
 void Game::game_init() {
-    game = new Play(renderer, textures, WINDOW_W, WINDOW_H);
+    game = new Play(renderer, textures, events, WINDOW_W, WINDOW_H);
 }
 
 // Game related loop stuff
@@ -62,29 +62,13 @@ void Game::init(bool fullscreen = false) {
 
 // Handles events such as exit, keypresses, mouse
 void Game::event_handler() {
-    SDL_Event event;
-    SDL_PollEvent(&event);
 
-    const Uint8* currentKeyStates = SDL_GetKeyboardState(NULL);
+    events.listen();
 
-    if (currentKeyStates[SDL_SCANCODE_UP]) {
-    }
+    auto eventer = events.get_state();
 
-    if (currentKeyStates[SDL_SCANCODE_DOWN]) {
-    }
-
-    if (currentKeyStates[SDL_SCANCODE_LEFT]) {
-    }
-
-    if (currentKeyStates[SDL_SCANCODE_RIGHT]) {
-    }
-
-    switch (event.type) {
-        case SDL_QUIT:
-            is_running = false;
-            break;
-        default:
-            break;
+    if (events.get_quit()) {
+        is_running = false;
     }
 }
 

@@ -8,6 +8,7 @@
 
 #include "../constants/blockids.hpp"
 #include "../texture/texturehandler.hpp"
+#include "../event/eventhandler.hpp"
 #include "play.hpp"
 
 class Game {
@@ -34,6 +35,7 @@ private:
     SDL_Window* window;
     SDL_Renderer* renderer;
     TextureHandler textures;
+    EventHandler events;
 };
 
 

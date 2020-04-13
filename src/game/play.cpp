@@ -1,9 +1,10 @@
 #include "play.hpp"
 
-Play::Play(SDL_Renderer* renderer, TextureHandler &textures, int WINDOW_W, int WINDOW_H)
+Play::Play(SDL_Renderer* renderer, TextureHandler &textures, EventHandler &events, int WINDOW_W, int WINDOW_H)
     : WINDOW_W{WINDOW_W}, WINDOW_H{WINDOW_H}, camera{WINDOW_W, WINDOW_H} {
     this->renderer = renderer;
     this->textures = &textures;
+    this->events = &events;
 
     camera.set_pos(0, 125);
 
@@ -24,10 +25,19 @@ void Play::update() {
     // Update all chunks
     chunks.update_all();
     chunks.check_area();
-    SDL_SetRenderDrawColor(renderer, 0x0, 0x0, 0x0, 255);
+
+    // Set background
+    SDL_SetRenderDrawColor(renderer, 0x7f, 0xc6, 0xdb, 255);
 
     // Update player
     player.update(chunks);
+
+    for (int i = 0; i < 4; ++i) {
+        if (events->get_state()[i]) {
+            player.direct_player(i, chunks);
+        }
+    }
+
 
     // Update camera
     handle_camera();

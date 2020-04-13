@@ -5,10 +5,13 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <random>
+#
 
 #include "../constants/blockids.hpp"
 #include "../texture/texturehandler.hpp"
 #include "../camera/camera.hpp"
+#include "../event/eventhandler.hpp"
 #include "../chunk/chunkgroup.hpp"
 #include "../gameobject/player.hpp"
 
@@ -16,7 +19,7 @@ class Play {
 
 public:
     Play() {};
-    Play(SDL_Renderer* renderer, TextureHandler &textures, int WINDOW_W, int WINDOW_H);
+    Play(SDL_Renderer* renderer, TextureHandler &textures, EventHandler &events, int WINDOW_W, int WINDOW_H);
     ~Play();
 
     void event_handler();
@@ -29,6 +32,7 @@ private:
 
     SDL_Renderer* renderer;
     TextureHandler* textures;
+    EventHandler* events;
     Chunk_Group chunks;
     Camera camera;
     Player player;

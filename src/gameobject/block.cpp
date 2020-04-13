@@ -24,7 +24,7 @@ void Block::update() {
 
     dest.h = src.h;
     dest.w = src.w;
-    dest.x = get_x()+(static_cast<int>(get_x())%10);
+    dest.x = get_x();
     dest.y = get_y();
 }
 

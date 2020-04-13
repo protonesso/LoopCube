@@ -6,7 +6,7 @@
 #include <string>
 #include <vector>
 #include <random>
-#
+#include <cmath>
 
 #include "../constants/blockids.hpp"
 #include "../texture/texturehandler.hpp"
@@ -29,6 +29,8 @@ private:
     int WINDOW_W;
     int WINDOW_H;
     void handle_camera();
+    void draw_selection();
+    void print_mouse_pos();
 
     SDL_Renderer* renderer;
     TextureHandler* textures;

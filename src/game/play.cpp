@@ -21,6 +21,12 @@ Play::~Play() {
 
 }
 
+void Play::print_mouse_pos() {
+    // Just for debugging
+    auto pos = events->get_mouse_pos();
+    std::cout << "x: " << pos[0] << " / y: " << pos[1] << " / down: " << events->get_mouse_down() << std::endl;
+}
+
 void Play::update() {
     // Update all chunks
     chunks.update_all();
@@ -31,6 +37,7 @@ void Play::update() {
 
     // Update player
     player.update(chunks);
+
 
     for (int i = 0; i < 4; ++i) {
         if (events->get_state()[i]) {
@@ -45,7 +52,25 @@ void Play::update() {
 
 void Play::render() {
     chunks.render_all();
+
     player.render();
+
+    draw_selection();
+}
+
+void Play::draw_selection() {
+    int b_w = static_cast<int>(block_w);
+    int b_h = static_cast<int>(block_h);
+
+    auto mpos = events->get_mouse_pos();
+
+    const int sel_x = floor((mpos[0] - camera.get_x()) / b_w) * b_w + camera.get_x();
+    const int sel_y = floor((mpos[1] - camera.get_y()) / b_h) * b_h + camera.get_y();
+
+    SDL_Rect selection{sel_x, sel_y, b_w, b_h};
+
+    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 75);
+    SDL_RenderFillRect(renderer, &selection);
 }
 
 void Play::handle_camera() {

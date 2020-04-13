@@ -40,7 +40,7 @@ void Chunk::generate_chunk() {
         double d_x = (double)x/(double)MAX_WIDTH;
 
         // Generate world
-        int temp = floor(terrain_gen.noise(d_x+(slot), 0)*10);
+        int temp = floor(terrain_gen.noise(d_x+(slot), 0)*6);
 
         int offset = 30;
         for (int y = 0; y < MAX_HEIGHT-temp-offset; ++y) {

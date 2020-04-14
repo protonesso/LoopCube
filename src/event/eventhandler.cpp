@@ -1,7 +1,7 @@
 #include "eventhandler.hpp"
 
 EventHandler::EventHandler()
-    : quit{false}, keys_set{SDL_SCANCODE_UP, SDL_SCANCODE_RIGHT, SDL_SCANCODE_DOWN, SDL_SCANCODE_LEFT, SDL_SCANCODE_I}, mouse_down{0} {
+    : quit{false}, keys_set{SDL_SCANCODE_W, SDL_SCANCODE_D, SDL_SCANCODE_S, SDL_SCANCODE_A, SDL_SCANCODE_I}, mouse_down{0} {
     state.resize(keys_set.size());
 }
 

@@ -1,7 +1,7 @@
 #include "play.hpp"
 
 Play::Play(SDL_Renderer* renderer, TextureHandler &textures, EventHandler &events, int WINDOW_W, int WINDOW_H)
-    : WINDOW_W{WINDOW_W}, WINDOW_H{WINDOW_H}, camera{WINDOW_W, WINDOW_H} {
+    : WINDOW_W{WINDOW_W}, WINDOW_H{WINDOW_H}, camera{WINDOW_W, WINDOW_H}, fade{60} {
     this->renderer = renderer;
     this->textures = &textures;
     this->events = &events;
@@ -48,6 +48,9 @@ void Play::update() {
 
     // Update camera
     handle_camera();
+
+    // Update animation(s)
+    fade.tick();
 }
 
 void Play::render() {
@@ -69,7 +72,10 @@ void Play::draw_selection() {
 
     SDL_Rect selection{sel_x, sel_y, b_w, b_h};
 
-    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 75);
+    int fade_amount = std::abs(std::sin(static_cast<double>(fade.get_frame())/20))*30+50;
+
+
+    SDL_SetRenderDrawColor(renderer, 255, 255, 255, fade_amount);
     SDL_RenderFillRect(renderer, &selection);
 }
 

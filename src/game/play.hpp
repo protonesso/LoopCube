@@ -7,6 +7,7 @@
 #include <vector>
 #include <random>
 #include <cmath>
+#include <ctime>
 
 #include "../constants/blockids.hpp"
 #include "../texture/texturehandler.hpp"
@@ -14,6 +15,7 @@
 #include "../event/eventhandler.hpp"
 #include "../chunk/chunkgroup.hpp"
 #include "../gameobject/player.hpp"
+#include "../math/animation.hpp"
 
 class Play {
 
@@ -38,6 +40,9 @@ private:
     Chunk_Group chunks;
     Camera camera;
     Player player;
+
+    // Animations
+    Animation fade;
 
 };
 

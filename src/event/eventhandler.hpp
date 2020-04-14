@@ -23,10 +23,10 @@ public:
 private:
     bool quit;
     /* Keyboard configuration
-      [0] = up; default = SDL_SCANCODE_UP
-      [1] = right; default = SDL_SCANCODE_RIGHT
-      [2] = down; default = SDL_SCANCODE_DOWN
-      [3] = left; default = SDL_SCANCODE_LEFT
+      [0] = up; default = SDL_SCANCODE_W
+      [1] = right; default = SDL_SCANCODE_D
+      [2] = down; default = SDL_SCANCODE_S
+      [3] = left; default = SDL_SCANCODE_A
       [4] = inventory; default = SDL_SCANCODE_I
     */
     std::vector<SDL_Scancode> keys_set;

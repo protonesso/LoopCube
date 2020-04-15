@@ -1,52 +1,21 @@
-# TODO CLEAN THIS UP
 FLAGS=-Wall -Wextra -lSDL2 -lSDL2_image
 CXX=g++
+TARGET=LoopCube
 
-Debug: main.o game.o texture.o gameobj.o camera.o block.o chunk.o chunkgroup.o texturehandler.o perlin.o player.o play.o eventhandler.o animation.o
-	$(CXX) $(FLAGS) -o bin/Debug/LoopCube main.o game.o texture.o gameobj.o camera.o block.o chunk.o chunkgroup.o texturehandler.o perlin.o player.o play.o eventhandler.o animation.o
-	mv *.o obj/Debug/src/
+SRC=$(shell find src -name '*.cpp')
+OBJ=$(patsubst %.cpp,obj/%.o,$(SRC))
 
-main.o: src/main.cpp
-	$(CXX) $(FLAGS) -c src/main.cpp
+_SRC_FILES=$(shell find src -type f -name '*.cpp' -printf '%f\n')
+SRC_FILES=$(patsubst %.cpp,obj/%.o,$(_SRC_FILES))
 
-game.o: src/game/game.cpp
-	$(CXX) $(FLAGS) -c src/game/game.cpp
+all: $(TARGET)
 
-gameobj.o: src/gameobject/gameobj.cpp
-	$(CXX) $(FLAGS) -c src/gameobject/gameobj.cpp
+$(TARGET): $(OBJ)
+	$(CXX) $(FLAGS) -o bin/$@ $(SRC_FILES) $(FLAGS)
 
-texture.o: src/texture/texture.cpp
-	$(CXX) $(FLAGS) -c src/texture/texture.cpp
-
-camera.o: src/camera/camera.cpp
-	$(CXX) $(FLAGS) -c src/camera/camera.cpp
-
-block.o: src/gameobject/block.cpp
-	$(CXX) $(FLAGS) -c src/gameobject/block.cpp
-
-chunk.o: src/chunk/chunk.cpp
-	$(CXX) $(FLAGS) -c src/chunk/chunk.cpp
-
-chunkgroup.o: src/chunk/chunkgroup.cpp
-	$(CXX) $(FLAGS) -c src/chunk/chunkgroup.cpp
-
-texturehandler.o: src/texture/texturehandler.cpp
-	$(CXX) $(FLAGS) -c src/texture/texturehandler.cpp
-
-perlin.o: src/math/perlin.cpp
-	$(CXX) $(FLAGS) -c src/math/perlin.cpp
-
-player.o: src/gameobject/player.cpp
-	$(CXX) $(FLAGS) -c src/gameobject/player.cpp
-
-play.o: src/game/play.cpp
-	$(CXX) $(FLAGS) -c src/game/play.cpp
-
-eventhandler.o: src/event/eventhandler.cpp
-	$(CXX) $(FLAGS) -c src/event/eventhandler.cpp
-
-animation.o: src/math/animation.cpp
-	$(CXX) $(FLAGS) -c src/math/animation.cpp
+obj/%.o: %.cpp
+	$(CXX) -c -o obj/$(notdir $@) $< $(FLAGS)
 
 cleanDebug:
-	rm -rf bin/Debug/LoopCube
+	rm bin/$(TARGET)
+	rm obj/*

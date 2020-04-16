@@ -5,7 +5,7 @@ EventHandler::EventHandler()
     state.resize(keys_set.size());
 }
 
-EventHandler::~EventHandler() {};
+EventHandler::~EventHandler() {}
 
 void EventHandler::listen() {
 

@@ -1,4 +1,5 @@
-FLAGS=-Wall -Wextra -lSDL2 -lSDL2_image
+FLAGS=-g -Wall -Werror -Wextra -pipe -pedantic
+LIBS=-lSDL2 -lSDL2_image
 CXX=g++
 TARGET=LoopCube
 
@@ -11,10 +12,10 @@ SRC_FILES=$(patsubst %.cpp,obj/%.o,$(_SRC_FILES))
 all: $(TARGET)
 
 $(TARGET): $(OBJ)
-	$(CXX) $(FLAGS) -o bin/$@ $(SRC_FILES) $(FLAGS)
+	$(CXX) $(FLAGS) -o bin/$@ $(SRC_FILES) $(FLAGS) $(LIBS)
 
 obj/%.o: %.cpp
-	$(CXX) -c -o obj/$(notdir $@) $< $(FLAGS)
+	$(CXX) -c -o obj/$(notdir $@) $< $(FLAGS) $(LIBS)
 
 cleanDebug:
 	rm bin/$(TARGET)

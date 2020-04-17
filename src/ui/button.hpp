@@ -4,15 +4,19 @@
 #include <string>
 
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_ttf.h>
 #include "../texture/texturehandler.hpp"
+#include "text.hpp"
 #include "../math/aabb.hpp"
 
 class Button {
 public:
     Button() = default;
-    Button(int id, SDL_Renderer* renderer, TextureHandler &textures, int x, int y);
+    Button(int id, SDL_Renderer* renderer, TextureHandler &textures, int x, int y, int width, int height = 32);
     ~Button();
 
+    void set_x(int x);
+    void set_y(int y);
     void update(int mouse_x, int mouse_y, int mouse_state);
     void render();
 
@@ -26,15 +30,18 @@ private:
     TextureHandler* textures;
     std::string text;
     unsigned int id;
-
-    // Mouse state
     int x;
     int y;
+    int width;
+    int height;
+
+    // Mouse state
     bool hovered;
     bool being_clicked;
     bool clicked;
 
     SDL_Rect src, dest;
+    Text* button_text;
 
 };
 

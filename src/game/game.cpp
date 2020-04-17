@@ -1,6 +1,17 @@
 #include "game.hpp"
 
-Game::Game() : title{"LoopCube"} {
+enum GAME_STATE {
+    // Menu
+    STATE_MAIN_MENU,
+    STATE_CONFIG,
+
+    // Game
+    STATE_PLAYING,
+    STATE_PAUSE,
+    STATE_INVENTORY,
+} STATE;
+
+Game::Game() : title{"LoopCube"}, state{}, game{nullptr} {
 
 }
 
@@ -14,13 +25,37 @@ Game::~Game() {
 void Game::game_init() {
     textures = TextureHandler(renderer);
     //game = new Play(renderer, textures, events, WINDOW_W, WINDOW_H);
-    menu = new Menu(renderer, textures, events, {"one", "two", "three", "four", "five"});
+    menu = new Menu(renderer, textures, events, &WINDOW_W, &WINDOW_H, {"Play", "About", "Settings", "Exit"});
 }
 
 // Game related loop stuff
 void Game::update() {
     //game->update();
-    menu->update();
+    if (state == STATE_MAIN_MENU) {
+        menu->update();
+        if (menu->get_pressed() == 0) {
+            state.set(STATE_PLAYING);
+        }
+        if (menu->get_pressed() == 1) {
+            std::cout << "Don't worry, about coming soon!" << std::endl;
+        }
+        if (menu->get_pressed() == 2) {
+            std::cout << "Don't worry, settings coming soon!" << std::endl;
+        }
+        if (menu->get_pressed() == 3) {
+            is_running = false;
+        }
+    }
+    if (state == STATE_PLAYING) {
+        // Check if the game is nullptr, then create it
+        if (game == nullptr) {
+            game = new Play(renderer, textures, events, &WINDOW_W, &WINDOW_H);
+        }
+        game->update();
+    }
+
+    // Update screen size
+    SDL_GetWindowSize(window, &WINDOW_W, &WINDOW_H);
 }
 
 
@@ -30,7 +65,12 @@ void Game::render() {
     SDL_RenderClear(renderer);
 
     // game->render();
-    menu->render();
+    if (state == STATE_MAIN_MENU) {
+        menu->render();
+    }
+    if (state == STATE_PLAYING) {
+        game->render();
+    }
 
     SDL_RenderPresent(renderer);
 }
@@ -43,6 +83,7 @@ void Game::init(bool fullscreen = false) {
     if (fullscreen) {
         flags = SDL_WINDOW_FULLSCREEN;
     }
+    flags = flags | SDL_WINDOW_RESIZABLE;
 
     if (SDL_Init(SDL_INIT_EVERYTHING) == 0) {
         std::cout << "[SDL] Initialized SDL" << std::endl;
@@ -57,6 +98,7 @@ void Game::init(bool fullscreen = false) {
 
     // Todo check error
     IMG_Init(IMG_INIT_PNG);
+    TTF_Init();
 
     game_init();
 

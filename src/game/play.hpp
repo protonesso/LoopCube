@@ -21,15 +21,15 @@ class Play {
 
 public:
     Play() {};
-    Play(SDL_Renderer* renderer, TextureHandler &textures, EventHandler &events, int WINDOW_W, int WINDOW_H);
+    Play(SDL_Renderer* renderer, TextureHandler &textures, EventHandler &events, int *WINDOW_W, int *WINDOW_H);
     ~Play();
 
     void event_handler();
     void render();
     void update();
 private:
-    int WINDOW_W;
-    int WINDOW_H;
+    int *WINDOW_W;
+    int *WINDOW_H;
     void handle_camera();
     void draw_selection();
     void print_mouse_pos();

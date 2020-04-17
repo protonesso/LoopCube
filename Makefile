@@ -1,5 +1,5 @@
 CXXFLAGS=-g -Wall -Wextra -pipe -pedantic
-LDFLAGS=-lSDL2 -lSDL2_image
+LDFLAGS=-lSDL2 -lSDL2_image -lSDL2_ttf
 CXX=g++
 TARGET=bin/LoopCube
 
@@ -9,7 +9,7 @@ OBJ=$(patsubst %.cpp,obj/%.o,$(SRC))
 $(TARGET): $(OBJ)
 	$(CXX) -o $@ $^ $(CXXFLAGS) $(LDFLAGS)
 
-obj/%.o: %.cpp
+obj/%.o: %.cpp %.hpp
 	@mkdir -p ${shell echo $@ | rev | cut -d '/' -f2- | rev}
 	$(CXX) -c -o $@ $< $(CXXFLAGS) $(LDFLAGS)
 

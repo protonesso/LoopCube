@@ -7,7 +7,7 @@ class Camera {
 
 public:
     Camera() {};
-    Camera(int width, int height);
+    Camera(int* width, int* height);
     ~Camera();
 
     void set_pos(double x, double y);
@@ -22,8 +22,8 @@ private:
     double x_pos;
     double y_pos;
 
-    int width;
-    int height;
+    int* width;
+    int* height;
 };
 
 

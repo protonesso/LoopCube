@@ -1,6 +1,6 @@
 #include "play.hpp"
 
-Play::Play(SDL_Renderer* renderer, TextureHandler &textures, EventHandler &events, int WINDOW_W, int WINDOW_H)
+Play::Play(SDL_Renderer* renderer, TextureHandler &textures, EventHandler &events, int *WINDOW_W, int *WINDOW_H)
     : WINDOW_W{WINDOW_W}, WINDOW_H{WINDOW_H}, camera{WINDOW_W, WINDOW_H}, fade{60} {
     this->renderer = renderer;
     this->textures = &textures;
@@ -78,7 +78,7 @@ void Play::draw_selection() {
 }
 
 void Play::handle_camera() {
-    double x = (player.get_default_x()*-1 + (WINDOW_W/2)) - player.get_width()/2;
-    double y = player.get_default_y()*-1 + (WINDOW_H/2) - player.get_height()/2;
+    double x = (player.get_default_x()*-1 + (*WINDOW_W/2)) - player.get_width()/2;
+    double y = player.get_default_y()*-1 + (*WINDOW_H/2) - player.get_height()/2;
     camera.set_pos(x, y);
 }

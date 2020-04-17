@@ -1,6 +1,6 @@
 #include "camera.hpp"
 
-Camera::Camera(int width, int height) {
+Camera::Camera(int* width, int* height) {
     this->width = width;
     this->height = height;
 }
@@ -22,9 +22,9 @@ double Camera::get_y() {
 }
 
 int Camera::get_width() {
-    return width;
+    return *width;
 }
 
 int Camera::get_height() {
-    return height;
+    return *height;
 }

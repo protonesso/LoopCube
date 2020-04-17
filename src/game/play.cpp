@@ -12,8 +12,6 @@ Play::Play(SDL_Renderer* renderer, TextureHandler &textures, EventHandler &event
     unsigned long int seed = 1;
     // Configure camera
     player = Player(textures, renderer, camera);
-
-    textures = TextureHandler(renderer);
     chunks = Chunk_Group(seed, renderer, camera, textures);
 }
 

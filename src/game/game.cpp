@@ -12,13 +12,15 @@ Game::~Game() {
 // Game related stuff below
 // Initiates Game objects
 void Game::game_init() {
-    game = new Play(renderer, textures, events, WINDOW_W, WINDOW_H);
+    textures = TextureHandler(renderer);
+    //game = new Play(renderer, textures, events, WINDOW_W, WINDOW_H);
+    menu = new Menu(renderer, textures, events, {"one", "two", "three", "four", "five"});
 }
 
 // Game related loop stuff
 void Game::update() {
-    game->update();
-
+    //game->update();
+    menu->update();
 }
 
 
@@ -27,7 +29,8 @@ void Game::update() {
 void Game::render() {
     SDL_RenderClear(renderer);
 
-    game->render();
+    // game->render();
+    menu->render();
 
     SDL_RenderPresent(renderer);
 }
@@ -79,7 +82,9 @@ bool Game::running() {
 void Game::free() {
     // Incase user manually runs this method and then the destructor calls this afterwards
     if (has_freed == false) {
-        std::cout << "Freeing..." << std::endl;
+        std::cout << "[Game] Cleaning up..." << std::endl;
+        //delete game;
+        delete menu;
         SDL_DestroyWindow(window);
         SDL_DestroyRenderer(renderer);
         SDL_Quit();

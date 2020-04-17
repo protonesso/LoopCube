@@ -1,22 +1,18 @@
-FLAGS=-g -Wall -Werror -Wextra -pipe -pedantic
-LIBS=-lSDL2 -lSDL2_image
+CXXFLAGS=-g -Wall -Wextra -pipe -pedantic
+LDFLAGS=-lSDL2 -lSDL2_image
 CXX=g++
-TARGET=LoopCube
+TARGET=bin/LoopCube
 
 SRC=$(shell find src -name '*.cpp')
 OBJ=$(patsubst %.cpp,obj/%.o,$(SRC))
 
-_SRC_FILES=$(shell find src -type f -name '*.cpp' -printf '%f\n')
-SRC_FILES=$(patsubst %.cpp,obj/%.o,$(_SRC_FILES))
-
-all: $(TARGET)
-
 $(TARGET): $(OBJ)
-	$(CXX) $(FLAGS) -o bin/$@ $(SRC_FILES) $(FLAGS) $(LIBS)
+	$(CXX) -o $@ $^ $(CXXFLAGS) $(LDFLAGS)
 
 obj/%.o: %.cpp
-	$(CXX) -c -o obj/$(notdir $@) $< $(FLAGS) $(LIBS)
+	@mkdir -p ${shell echo $@ | rev | cut -d '/' -f2- | rev}
+	$(CXX) -c -o $@ $< $(CXXFLAGS) $(LDFLAGS)
 
-cleanDebug:
-	rm bin/$(TARGET)
-	rm obj/*
+clean:
+	rm $(TARGET)
+	rm -rf obj/*

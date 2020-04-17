@@ -10,6 +10,7 @@
 #include "../texture/texturehandler.hpp"
 #include "../event/eventhandler.hpp"
 #include "play.hpp"
+#include "../menu/menu.hpp"
 
 class Game {
 
@@ -32,6 +33,8 @@ private:
     bool is_running = false;
 
     Play* game;
+    Menu* menu;
+
     SDL_Window* window;
     SDL_Renderer* renderer;
     TextureHandler textures;

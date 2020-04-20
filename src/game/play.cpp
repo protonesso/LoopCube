@@ -56,27 +56,43 @@ void Play::render() {
 
     player.render();
 
-    draw_selection();
+
+    int p1, p2;
+    draw_selection(&p1, &p2);
+    Chunk* chunk = chunks.get_chunk_at(p1-8, p2);
+    if (chunk != nullptr) {
+        int chunk_pos = std::abs(p1-(chunk->get_slot()*8));
+        if (events->get_mouse_down()) {
+        chunk->place_block(0, std::abs(chunk_pos), p2);
+
+        }
+    }
 }
 
-void Play::draw_selection() {
+// Draw a selection box and set p1 and p2 to the position
+// Perhaps we should rename this to get_selection and seperate rendering functions?
+void Play::draw_selection(int* p1, int* p2) {
     int b_w = static_cast<int>(block_w);
     int b_h = static_cast<int>(block_h);
 
     auto mpos = events->get_mouse_pos();
 
-    const int sel_x = floor((mpos[0] - camera.get_x()) / b_w) * b_w + camera.get_x();
-    const int sel_y = floor((mpos[1] - camera.get_y()) / b_h) * b_h + camera.get_y();
+    const int sel_x = floor((mpos[0] - camera.get_x()) / b_w) * b_w;
+    const int sel_y = floor((mpos[1] - camera.get_y()) / b_h) * b_h;
 
-    SDL_Rect selection{sel_x, sel_y, b_w, b_h};
+    SDL_Rect selection{sel_x + camera.get_x(), sel_y + camera.get_y(), b_w, b_h};
 
     int fade_amount = std::abs(std::sin(static_cast<double>(fade.get_frame())/20))*30+50;
 
 
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, fade_amount);
     SDL_RenderFillRect(renderer, &selection);
+
+    *p1 = sel_x/b_w;
+    *p2 = sel_y/b_h;
 }
 
+// Sets camera to player position
 void Play::handle_camera() {
     double x = (player.get_default_x()*-1 + (*WINDOW_W/2)) - player.get_width()/2;
     double y = player.get_default_y()*-1 + (*WINDOW_H/2) - player.get_height()/2;

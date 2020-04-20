@@ -23,6 +23,7 @@ public:
     void update_all();
     void render_all();
     void place_block(int id, int x, int y);
+    void destroy_block(int x, int y);
     void generate_chunk();
 
     int get_slot();

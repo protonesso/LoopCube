@@ -43,11 +43,13 @@ void Player::direct_player(int direction, Chunk_Group chunks) {
             break;
         case 1: // RIGHT
             vel_x += vel_x_speed;
+            last_pos = 1;
             break;
         case 2: // DOWN
             break;
         case 3: // LEFT
             vel_x -= vel_x_speed;
+            last_pos = 3;
             break;
         default:
             std::cerr << "[Warning] Invalid direction" << std::endl;
@@ -63,12 +65,23 @@ double Player::get_vel_y() const {
 }
 
 void Player::update(Chunk_Group &chunks) {
-    // TODO possibly change engine code, player sometimes gets stuck in a wall
+    // TODO move engine code into it's own class for reusability
     vel_x *= 0.75;
     obj.x += vel_x;
 
-
+    // Check X velocity
     if (check_block_collision(chunks)) {
+        if (vel_x == 0) {
+            // If player happens to get stuck in the wall then push them out
+            if (last_pos == 1) {
+                obj.x -= 5;
+            } else if (last_pos == 3) {
+                obj.x += 5;
+            } else {
+                obj.x += 5;
+            }
+
+        }
         obj.x += vel_x * -1;
         vel_x = 0;
     }
@@ -76,6 +89,7 @@ void Player::update(Chunk_Group &chunks) {
     vel_y += .7;
     obj.y += vel_y;
 
+    // Check Y velocity
     if (check_block_collision(chunks)) {
         obj.y += vel_y * -1;
         vel_y = 0;

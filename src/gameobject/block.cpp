@@ -29,7 +29,8 @@ void Block::update() {
 }
 
 void Block::render() {
-    render_shadow(); // Note: When settings menu added, add option to disable shadow, it can be resource hungry
+    // Disabled until blocks get sorted on placement
+    //render_shadow(); // Note: When settings menu added, add option to disable shadow, it can be resource hungry
     SDL_RenderCopy(renderer, textures->get_texture(texture_id), &src, &dest);
 }
 

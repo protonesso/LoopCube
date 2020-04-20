@@ -60,6 +60,10 @@ void Chunk::generate_chunk() {
 
 }
 
+void destroy_block(int x, int y) {
+    
+}
+
 void Chunk::place_block(int id, int x, int y) {
     Block temp_block{id, *textures, renderer, *camera, get_chunk_x(x), y};
     // Check if between chunk size
@@ -74,8 +78,6 @@ void Chunk::place_block(int id, int x, int y) {
         }
         if (!is_duplicate) {
             chunk.push_back(temp_block);
-        } else {
-            std::cout << "here" << std::endl;
         }
     } else {
         std::cerr << "[ERROR] Block placed too far" << std::endl;

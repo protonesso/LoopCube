@@ -31,7 +31,7 @@ private:
     int *WINDOW_W;
     int *WINDOW_H;
     void handle_camera();
-    void draw_selection();
+    void draw_selection(int* p1, int* p2);
     void print_mouse_pos();
 
     SDL_Renderer* renderer;

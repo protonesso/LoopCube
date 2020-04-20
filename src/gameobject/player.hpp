@@ -25,6 +25,7 @@ private:
     double vel_x;
     double vel_y;
     double vel_x_speed;
+    int last_pos;
 };
 
 #endif // PLAYER_HPP

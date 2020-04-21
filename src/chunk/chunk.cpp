@@ -36,11 +36,11 @@ std::vector<Block>* Chunk::get_chunk() {
 }
 
 void Chunk::generate_chunk() {
-    for (int x = 0; x < MAX_WIDTH; ++x) {
+    for (int x = 0; x < MAX_WIDTH+1; ++x) {
         double d_x = (double)x/(double)MAX_WIDTH;
 
         // Generate world
-        int temp = floor(terrain_gen.noise(d_x+(slot), 0)*6);
+        int temp = floor(terrain_gen.noise((d_x+slot) * .3, 0)*12);
 
         int offset = 30;
         for (int y = 0; y < MAX_HEIGHT-temp-offset; ++y) {
@@ -67,7 +67,7 @@ void destroy_block(int x, int y) {
 void Chunk::place_block(int id, int x, int y) {
     Block temp_block{id, *textures, renderer, *camera, get_chunk_x(x), y};
     // Check if between chunk size
-    if ((int)chunk.size()+1 < get_chunk_max_size() || x < MAX_WIDTH || x > 0 || y < MAX_HEIGHT || y > 0) {
+    if (x < MAX_WIDTH+1 && x >= 0 && y < MAX_HEIGHT+1 && y >= 0) {
         // Check if a block has been placed here before
         bool is_duplicate = false;
         for (auto &i: chunk) {
@@ -80,7 +80,7 @@ void Chunk::place_block(int id, int x, int y) {
             chunk.push_back(temp_block);
         }
     } else {
-        std::cerr << "[ERROR] Block placed too far" << std::endl;
+        std::cout << "[ERROR] Block placed too far" << std::endl;
     }
 
 }

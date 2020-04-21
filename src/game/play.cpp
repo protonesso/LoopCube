@@ -30,9 +30,6 @@ void Play::update() {
     chunks.update_all();
     chunks.check_area();
 
-    // Set background
-    SDL_SetRenderDrawColor(renderer, 0x7f, 0xc6, 0xdb, 255);
-
     // Update player
     player.update(chunks);
 
@@ -52,6 +49,7 @@ void Play::update() {
 }
 
 void Play::render() {
+    SDL_SetRenderDrawColor(renderer, 0x79, 0xae, 0xd9, 255);
     chunks.render_all();
 
     player.render();

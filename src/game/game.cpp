@@ -89,7 +89,7 @@ void Game::init(bool fullscreen = false) {
         std::cout << "[SDL] Initialized SDL" << std::endl;
         window = SDL_CreateWindow(title, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, WINDOW_W, WINDOW_H, flags);
         renderer = SDL_CreateRenderer(window, -1, 0);
-        SDL_SetRenderDrawColor(renderer, 0x79, 0xae, 0xd9, 255);
+        SDL_SetRenderDrawColor(renderer, 0x0, 0x0, 0x0, 255);
         SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
     } else {
         std::cerr << "[SDL] ERROR: Failed to initialize SDL!" << std::endl;

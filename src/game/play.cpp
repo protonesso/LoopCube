@@ -9,7 +9,7 @@ Play::Play(SDL_Renderer* renderer, TextureHandler &textures, EventHandler &event
     camera.set_pos(0, 125);
 
 
-    unsigned long int seed = 1;
+    unsigned long int seed = 8932478970182;
     // Configure camera
     player = Player(textures, renderer, camera);
     chunks = Chunk_Group(seed, renderer, camera, textures);
@@ -59,7 +59,7 @@ void Play::render() {
 
     int p1, p2;
     draw_selection(&p1, &p2);
-    Chunk* chunk = chunks.get_chunk_at(p1-8, p2);
+    Chunk* chunk = chunks.get_chunk_at(p1-8);
     if (chunk != nullptr) {
         int chunk_pos = std::abs(p1-(chunk->get_slot()*8));
         if (events->get_mouse_down()) {
@@ -80,7 +80,7 @@ void Play::draw_selection(int* p1, int* p2) {
     const int sel_x = floor((mpos[0] - camera.get_x()) / b_w) * b_w;
     const int sel_y = floor((mpos[1] - camera.get_y()) / b_h) * b_h;
 
-    SDL_Rect selection{sel_x + camera.get_x(), sel_y + camera.get_y(), b_w, b_h};
+    SDL_Rect selection{sel_x + static_cast<int>(camera.get_x()), sel_y + static_cast<int>(camera.get_y()), b_w, b_h};
 
     int fade_amount = std::abs(std::sin(static_cast<double>(fade.get_frame())/20))*30+50;
 

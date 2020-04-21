@@ -26,7 +26,7 @@ const int block_start = 0;
 const int sprite_start = 0xFA0;
 
 // TODO move to block.hpp
-const double block_w = 32;
-const double block_h = 32;
+const double block_w = 36;
+const double block_h = 36;
 
 #endif // BLOCKIDS

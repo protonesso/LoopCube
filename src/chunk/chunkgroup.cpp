@@ -17,7 +17,7 @@ std::vector<Chunk>* Chunk_Group::get_chunks() {
 
 bool Chunk_Group::chunk_already_generated(int id) {
     bool check = false;
-    for (auto i: past_chunks) {
+    for (auto &i: past_chunks) {
         if (i == id) {
             check = true;
             break;
@@ -27,8 +27,9 @@ bool Chunk_Group::chunk_already_generated(int id) {
 }
 
 void Chunk_Group::generate_chunk(int id) {
+    bool check = chunk_already_generated(id);
     // Generate the chunk if it hasn't been generated before
-    if (std::find(loaded_chunks.begin(), loaded_chunks.end(), id) == loaded_chunks.end() && !chunk_already_generated(id)) {
+    if (std::find(loaded_chunks.begin(), loaded_chunks.end(), id) == loaded_chunks.end() && !check) {
         Chunk temp_chunk(seed, id, renderer, *textures, *camera);
         group.push_back(temp_chunk);
 
@@ -36,17 +37,20 @@ void Chunk_Group::generate_chunk(int id) {
     }
 
     // If chunk has been generated before, just reload an older chunk
-    if (chunk_already_generated(id)) {
+    if (check) {
         // Get the index of the last unloaded chunk
         auto it_past_chunks = std::find(past_chunks.begin(), past_chunks.end(), id);
         int chunk_index = std::distance(past_chunks.begin(), it_past_chunks);
-        if (group_past.size() < chunk_index) {
+        try {
             // Add chunk back
             group.push_back(group_past.at(chunk_index));
             loaded_chunks.push_back(id);
             // Remove chunk from past_chunks to prevent from infinitely loaded chunks
             group_past.erase(group_past.begin() + chunk_index);
             past_chunks.erase(past_chunks.begin() + chunk_index);
+
+        } catch (std::out_of_range &e) {
+            std::cout << "[LOG] std::out_of_range handled: " << e.what() << std::endl;
         }
     }
 }
@@ -97,7 +101,7 @@ void Chunk_Group::sort_all() {
     std::sort(past_chunks.begin(), past_chunks.end());
 }
 
-Chunk* Chunk_Group::get_chunk_at(int x, int y) {
+Chunk* Chunk_Group::get_chunk_at(int x) {
     int id = 0;
     id = ceil((x*block_w) / (8 * block_w));
 

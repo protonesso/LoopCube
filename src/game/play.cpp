@@ -49,9 +49,9 @@ void Play::update() {
 }
 
 void Play::render() {
-    SDL_SetRenderDrawColor(renderer, 0x79, 0xae, 0xd9, 255);
     chunks.render_all();
 
+    SDL_SetRenderDrawColor(renderer, 0x79, 0xae, 0xd9, 255);
     player.render();
 
 

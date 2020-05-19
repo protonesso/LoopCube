@@ -17,6 +17,7 @@ public:
     std::vector<SDL_Scancode> get_keys_set();
     std::array<int, 2> get_mouse_pos();
     int get_mouse_down();
+    SDL_Event get_event();
 
     bool get_quit();
 
@@ -28,6 +29,7 @@ private:
       [2] = down; default = SDL_SCANCODE_S
       [3] = left; default = SDL_SCANCODE_A
       [4] = inventory; default = SDL_SCANCODE_I
+      [5...15] = hotbar_slot1...9,0; default = SDL_SCANCODE_1...9,0
     */
     std::vector<SDL_Scancode> keys_set;
     std::vector<int> state;

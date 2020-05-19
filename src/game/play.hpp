@@ -16,6 +16,7 @@
 #include "../chunk/chunkgroup.hpp"
 #include "../gameobject/player.hpp"
 #include "../math/animation.hpp"
+#include "../menu/inventory.hpp"
 
 class Play {
 
@@ -38,6 +39,7 @@ private:
     TextureHandler* textures;
     EventHandler* events;
     Chunk_Group chunks;
+    Inventory* inv;
     Camera camera;
     Player player;
 

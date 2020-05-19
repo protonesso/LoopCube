@@ -13,6 +13,7 @@ Play::Play(SDL_Renderer* renderer, TextureHandler &textures, EventHandler &event
     // Configure camera
     player = Player(textures, renderer, camera);
     chunks = Chunk_Group(seed, renderer, camera, textures);
+    inv = new Inventory(renderer, textures, events, WINDOW_W, WINDOW_H);
 }
 
 Play::~Play() {
@@ -32,6 +33,8 @@ void Play::update() {
 
     // Update player
     player.update(chunks);
+
+    inv->update();
 
 
     for (int i = 0; i < 4; ++i) {
@@ -53,6 +56,8 @@ void Play::render() {
 
     SDL_SetRenderDrawColor(renderer, 0x79, 0xae, 0xd9, 255);
     player.render();
+
+    inv->draw_hotbar();
 
 
     int p1, p2;

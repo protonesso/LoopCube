@@ -1,7 +1,11 @@
 #include "eventhandler.hpp"
 
 EventHandler::EventHandler()
-    : quit{false}, keys_set{SDL_SCANCODE_W, SDL_SCANCODE_D, SDL_SCANCODE_S, SDL_SCANCODE_A, SDL_SCANCODE_I}, mouse_down{0} {
+    : quit{false}, keys_set{SDL_SCANCODE_W, SDL_SCANCODE_D, SDL_SCANCODE_S, SDL_SCANCODE_A, SDL_SCANCODE_I,
+        SDL_SCANCODE_1, SDL_SCANCODE_2,
+        SDL_SCANCODE_3, SDL_SCANCODE_4, SDL_SCANCODE_5,
+        SDL_SCANCODE_6, SDL_SCANCODE_7, SDL_SCANCODE_8,
+        SDL_SCANCODE_9, SDL_SCANCODE_0}, mouse_down{0} {
     state.resize(keys_set.size());
 }
 
@@ -59,6 +63,10 @@ std::array<int, 2> EventHandler::get_mouse_pos() {
 
 int EventHandler::get_mouse_down() {
     return mouse_down;
+}
+
+SDL_Event EventHandler::get_event() {
+    return event;
 }
 
 bool EventHandler::get_quit() {

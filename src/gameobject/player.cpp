@@ -2,7 +2,6 @@
 
 Player::Player(TextureHandler &textures, SDL_Renderer* renderer, Camera &camera)
     : Game_Object{0xFA0, textures, renderer, camera, 0, 0, 30, 58}, vel_x{0}, vel_y{0}, vel_x_speed{2} {
-
 }
 
 Player::~Player() {
@@ -68,6 +67,8 @@ void Player::update(Chunk_Group &chunks) {
     // TODO move engine code into it's own class for reusability
     vel_x *= 0.75;
     obj.x += vel_x;
+
+
 
     // Check X velocity
     if (check_block_collision(chunks)) {

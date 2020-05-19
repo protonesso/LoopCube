@@ -35,7 +35,7 @@ void Player::jump(Chunk_Group &chunks) {
     obj.y -= 3;
 }
 
-void Player::direct_player(int direction, Chunk_Group chunks) {
+void Player::direct_player(int direction, Chunk_Group &chunks) {
     switch (direction) {
         case 0: // UP
             jump(chunks);

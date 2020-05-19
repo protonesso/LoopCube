@@ -17,7 +17,7 @@ public:
 
     // Movement
     void jump(Chunk_Group &chunks);
-    void direct_player(int direction, Chunk_Group chunks);
+    void direct_player(int direction, Chunk_Group &chunks);
 
     double get_vel_x() const;
     double get_vel_y() const;

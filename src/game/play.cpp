@@ -70,6 +70,8 @@ void Play::render() {
 
         }
     }
+
+    draw_debug_menu();
 }
 
 // Draw a selection box and set p1 and p2 to the position
@@ -100,4 +102,29 @@ void Play::handle_camera() {
     double x = (player.get_default_x()*-1 + (*WINDOW_W/2)) - player.get_width()/2;
     double y = player.get_default_y()*-1 + (*WINDOW_H/2) - player.get_height()/2;
     camera.set_pos(x, y);
+}
+
+
+void Play::draw_debug_menu() {
+    std::vector<std::string> dbg_text = {
+        "[[ DEBUG ]]",
+        // Player
+        "= Player =",
+        "X: " + std::to_string(player.get_default_x() / block_w)
+            + " / Y: " + std::to_string(player.get_default_y() / block_h),
+        // Chunk
+        "= Chunk =",
+        "Pos: " + std::to_string(chunks.get_id()),
+        "Size: " + std::to_string(chunks.get_chunks()->size())
+
+        
+    };
+    SDL_Color color;
+    // For some reason it must be setup like this...
+    color.r = 255; color.g = 255; color.b = 255;
+    int size = 14;
+    for (size_t i = 0; i < dbg_text.size(); ++i) {
+        Text dtext{renderer, dbg_text[i], color, size};
+        dtext.draw(0,i*size);
+    }
 }

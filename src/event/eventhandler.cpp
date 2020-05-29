@@ -5,7 +5,7 @@ EventHandler::EventHandler()
         SDL_SCANCODE_1, SDL_SCANCODE_2,
         SDL_SCANCODE_3, SDL_SCANCODE_4, SDL_SCANCODE_5,
         SDL_SCANCODE_6, SDL_SCANCODE_7, SDL_SCANCODE_8,
-        SDL_SCANCODE_9, SDL_SCANCODE_0}, mouse_down{0} {
+        SDL_SCANCODE_9, SDL_SCANCODE_0, SDL_SCANCODE_F8}, mouse_down{0} {
     state.resize(keys_set.size());
 }
 

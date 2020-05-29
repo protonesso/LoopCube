@@ -17,6 +17,7 @@
 #include "../gameobject/player.hpp"
 #include "../math/animation.hpp"
 #include "../menu/inventory.hpp"
+#include "../ui/text.hpp"
 
 class Play {
 
@@ -34,6 +35,7 @@ private:
     void handle_camera();
     void draw_selection(int* p1, int* p2);
     void print_mouse_pos();
+    void draw_debug_menu();
 
     SDL_Renderer* renderer;
     TextureHandler* textures;

@@ -36,7 +36,7 @@ std::vector<Block>* Chunk::get_chunk() {
 }
 
 void Chunk::generate_chunk() {
-    for (int x = 0; x < MAX_WIDTH+1; ++x) {
+    for (int x = 1; x < MAX_WIDTH+1; ++x) {
         double d_x = (double)x/(double)MAX_WIDTH;
 
         // Generate world

@@ -22,7 +22,7 @@ const std::vector<std::pair<int, std::string>> ids = {
     {0xFA4, "title_1"},
     {0xFA5, "title_2"},
     {0xFA6, "hotbar_slot"},
-    {0xFA7, "inventory_slot"}
+    {0xFA7, "inventory_menu"}
 };
 const int block_start = 0;
 const int sprite_start = 0xFA0;

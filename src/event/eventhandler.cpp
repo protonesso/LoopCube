@@ -12,14 +12,30 @@ EventHandler::EventHandler()
 EventHandler::~EventHandler() {}
 
 void EventHandler::listen() {
+    std::vector<int> exceptions{4, 16};
 
-
+    // Disable Exceptions
+    for (auto exc: exceptions) {
+        if (state[exc] == 1) {
+            state[exc] = 0;
+        }
+    }
 
     while (SDL_PollEvent(&event)) {
         const Uint8 *keystate = SDL_GetKeyboardState(NULL);
 
         // Set state for each key
         for (size_t i = 0; i < keys_set.size(); ++i) {
+            // Check exceptions; if found, skip.
+            bool check = false;
+            for (auto exc: exceptions) {
+                if (static_cast<size_t>(exc) == i) {
+                    check = true;
+                    break;
+                }
+            }
+            if (check == true) continue;
+
             if (keystate[keys_set[i]]) {
                 state[i] = 1;
             } else {
@@ -27,8 +43,14 @@ void EventHandler::listen() {
             }
         }
 
+
         switch(event.type) {
             case SDL_KEYDOWN:
+                for (auto exc: exceptions) {
+                    if (keystate[keys_set[exc]]) {
+                        state[exc] = 1;
+                    }
+                }
                 break;
             case SDL_MOUSEBUTTONDOWN:
                 mouse_down = 1;

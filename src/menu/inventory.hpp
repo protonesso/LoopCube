@@ -21,6 +21,8 @@ public:
     ~Inventory();
 
     void draw_hotbar();
+    void draw_inventory_menu();
+    bool get_inventory_visibility();
     void update();
 private:
     unsigned hotbar_slots;

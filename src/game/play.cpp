@@ -57,11 +57,10 @@ void Play::render() {
     SDL_SetRenderDrawColor(renderer, 0x79, 0xae, 0xd9, 255);
     player.render();
 
-    inv->draw_hotbar();
 
 
     int p1, p2;
-    draw_selection(&p1, &p2);
+    if (!inv->get_inventory_visibility()) draw_selection(&p1, &p2);
     Chunk* chunk = chunks.get_chunk_at(p1-8);
     if (chunk != nullptr) {
         int chunk_pos = std::abs(p1-(chunk->get_slot()*8));
@@ -71,7 +70,11 @@ void Play::render() {
         }
     }
 
-    draw_debug_menu();
+    if (!inv->get_inventory_visibility()) inv->draw_hotbar();
+
+    inv->draw_inventory_menu();
+
+    if (!inv->get_inventory_visibility()) draw_debug_menu();
 }
 
 // Draw a selection box and set p1 and p2 to the position

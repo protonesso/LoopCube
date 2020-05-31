@@ -8,6 +8,7 @@
 #include "../texture/texturehandler.hpp"
 #include "../event/eventhandler.hpp"
 #include "../constants/blockids.hpp"
+#include "../gameobject/position.hpp"
 
 
 class Inventory {
@@ -30,6 +31,8 @@ private:
     bool visible;
     bool show_inventory_menu;
     int hotbar_pos;
+    std::vector<int> get_hovered_pos(int x, int y, int corner_x, int corner_y, bool draw);
+    bool collision(int, int, int, int, int, int, int, int);
 
     std::vector<int> slots;
 

@@ -60,8 +60,15 @@ void Chunk::generate_chunk() {
 
 }
 
-void destroy_block(int x, int y) {
-    
+void Chunk::destroy_block(int x, int y) {
+    bool exists = false;
+    for (auto i = chunk.begin(); i < chunk.end(); ++i) {
+        if (get_chunk_x(x) == i->get_default_x() && y == i->get_default_y()) {
+            exists = true;
+            chunk.erase(i);
+            break;
+        }
+    }
 }
 
 void Chunk::place_block(int id, int x, int y) {

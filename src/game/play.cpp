@@ -61,12 +61,14 @@ void Play::render() {
 
     int p1, p2;
     if (!inv->get_inventory_visibility()) draw_selection(&p1, &p2);
+
+    // Get cursor over chunk
     Chunk* chunk = chunks.get_chunk_at(p1-8);
     if (chunk != nullptr) {
+        // Do some math to get the chunk position
         int chunk_pos = std::abs(p1-(chunk->get_slot()*8));
         if (events->get_mouse_down()) {
-        chunk->place_block(0, std::abs(chunk_pos), p2);
-
+            chunk->destroy_block(chunk_pos, p2);
         }
     }
 

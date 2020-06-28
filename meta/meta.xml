@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<app version="1">
+    <name>LoopCube</name>
+    <coder>NekoBit</coder>
+    <version>0.1</version>
+    <long_description>This is an official port of LoopCube by NekoBit.
+    LoopCube is a game written in C++ that utilizes the SDL2 Library.
+
+    Supports: Keyboard / Mouse.
+
+    Source Code => github.com/nek0bit/LoopCube</long_description> 
+</app>

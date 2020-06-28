@@ -3,4 +3,6 @@
 *.layout
 obj/
 bin/
-.vscode
+.vscode/
+loopcube.elf
+loopcube.rpx

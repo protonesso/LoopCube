@@ -62,9 +62,9 @@ int Button::get_id() {
 
 void Button::render() {
     SDL_Rect begin{x, dest.y, src.w*2, dest.h}, end{dest.x+dest.w, dest.y, src.w*2, dest.h};
-    SDL_RenderCopy(renderer, textures->get_texture(sprite_start+2), &src, &begin);
-    SDL_RenderCopy(renderer, textures->get_texture(sprite_start+1), &src, &dest);
-    SDL_RenderCopy(renderer, textures->get_texture(sprite_start+3), &src, &end);
+    SDL_RenderCopy(renderer, textures->get_texture(6), &src, &begin);
+    SDL_RenderCopy(renderer, textures->get_texture(5), &src, &dest);
+    SDL_RenderCopy(renderer, textures->get_texture(7), &src, &end);
     if (button_text != nullptr) {
         button_text->draw(dest.x, dest.y);
     }

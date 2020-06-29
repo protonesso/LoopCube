@@ -7,7 +7,7 @@
 #include <algorithm>
 #include "texturehandler.hpp"
 #include "eventhandler.hpp"
-#include "blockids.hpp"
+#include "constants.hpp"
 #include "position.hpp"
 
 
@@ -26,8 +26,8 @@ public:
     bool get_inventory_visibility();
     void update();
 private:
-    unsigned hotbar_slots;
-    unsigned max_slots;
+    int hotbar_slots;
+    int max_slots;
     bool visible;
     bool show_inventory_menu;
     int hotbar_pos;

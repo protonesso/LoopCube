@@ -151,6 +151,8 @@ void Game::free() {
         std::cout << "[Game] Cleaning up..." << std::endl;
         //delete game;
         delete menu;
+        std::cout << "[Textures] Freeing..." << std::endl;
+        textures.free_textures();
         SDL_DestroyWindow(window);
         SDL_DestroyRenderer(renderer);
         SDL_Quit();

@@ -6,7 +6,7 @@
 #include <SDL2/SDL.h>
 
 #include "texture.hpp"
-#include "blockids.hpp"
+#include "constants.hpp"
 
 class TextureHandler {
 
@@ -16,10 +16,9 @@ public:
     ~TextureHandler();
 
     SDL_Texture* get_texture(int id);
-
     void free_textures();
-
 private:
+
     SDL_Renderer* renderer;
     std::vector<std::pair<int, Texture>> textures;
 };

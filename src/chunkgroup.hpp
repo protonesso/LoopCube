@@ -6,7 +6,7 @@
 #include <iostream>
 
 #include "chunk.hpp"
-#include "blockids.hpp"
+#include "constants.hpp"
 #include "texturehandler.hpp"
 
 // TODO non-important Rename this properly

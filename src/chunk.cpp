@@ -46,13 +46,13 @@ void Chunk::generate_chunk() {
         for (int y = 0; y < MAX_HEIGHT-temp-offset; ++y) {
             double d_y = (double)y/(double)MAX_HEIGHT;
             if (y == 0) {
-                place_block(0, x, y+temp+offset);
+                place_block("grass", x, y+temp+offset);
             } else if (y >= 1 && y <= 3) {
-                place_block(1, x, y+temp+offset);
+                place_block("dirt", x, y+temp+offset);
             } else {
                 int cave_noise = terrain_gen.noise(d_x+(slot), d_y*12)*400;
                 if (cave_noise < 150 && cave_noise > -150) {
-                    place_block(2, x, y+temp+offset);
+                    place_block("stone", x, y+temp+offset);
                 }
             }
         }
@@ -71,7 +71,7 @@ void Chunk::destroy_block(int x, int y) {
     }
 }
 
-void Chunk::place_block(int id, int x, int y) {
+void Chunk::place_block(std::string id, int x, int y) {
     Block temp_block{id, *textures, renderer, *camera, get_chunk_x(x), y};
     // Check if between chunk size
     if (x < MAX_WIDTH+1 && x >= 0 && y < MAX_HEIGHT+1 && y >= 0) {

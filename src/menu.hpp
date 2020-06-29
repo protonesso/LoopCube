@@ -8,7 +8,7 @@
 
 #include "texturehandler.hpp"
 #include "eventhandler.hpp"
-#include "blockids.hpp"
+#include "constants.hpp"
 #include "button.hpp"
 #include "animation.hpp"
 

@@ -5,9 +5,10 @@ EventHandler::EventHandler()
         SDL_SCANCODE_1, SDL_SCANCODE_2,
         SDL_SCANCODE_3, SDL_SCANCODE_4, SDL_SCANCODE_5,
         SDL_SCANCODE_6, SDL_SCANCODE_7, SDL_SCANCODE_8,
-        SDL_SCANCODE_9, SDL_SCANCODE_0, SDL_SCANCODE_F8}, mouse_down{0},
+        SDL_SCANCODE_9, SDL_SCANCODE_0, SDL_SCANCODE_F8},
         buttons_set{SDL_CONTROLLER_BUTTON_MAX, SDL_CONTROLLER_BUTTON_DPAD_RIGHT, SDL_CONTROLLER_BUTTON_DPAD_DOWN,
-        SDL_CONTROLLER_BUTTON_DPAD_LEFT, SDL_CONTROLLER_BUTTON_X, SDL_CONTROLLER_BUTTON_START, SDL_CONTROLLER_BUTTON_LEFTSHOULDER, SDL_CONTROLLER_BUTTON_RIGHTSHOULDER} {
+        SDL_CONTROLLER_BUTTON_DPAD_LEFT, SDL_CONTROLLER_BUTTON_X, SDL_CONTROLLER_BUTTON_START, SDL_CONTROLLER_BUTTON_LEFTSHOULDER, SDL_CONTROLLER_BUTTON_RIGHTSHOULDER},
+        mouse_down{0} {
     state.resize(keys_set.size());
     button_state.resize(buttons_set.size());
 }
@@ -88,7 +89,7 @@ void EventHandler::listen() {
                 }
                 break;
             case SDL_JOYBUTTONDOWN:
-                for (auto i = 0; i < buttons_set.size(); ++i) {
+                for (long unsigned int i = 0; i < buttons_set.size(); ++i) {
                     if (event.jbutton.button == buttons_set[i]) {
                         button_state[i] = 1;
                         if (i == 5) {
@@ -101,7 +102,7 @@ void EventHandler::listen() {
                 }
                 break;
             case SDL_JOYBUTTONUP:
-                for (auto i = 0; i < buttons_set.size(); ++i) {
+                for (long unsigned int i = 0; i < buttons_set.size(); ++i) {
                     if (event.jbutton.button == buttons_set[i]) {
                         button_state[i] = 0;
                         if (i == 6) {

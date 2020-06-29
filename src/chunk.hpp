@@ -6,7 +6,7 @@
 #include <time.h>
 #include <SDL2/SDL.h>
 
-#include "blockids.hpp"
+#include "constants.hpp"
 #include "block.hpp"
 #include "perlin.hpp"
 #include "camera.hpp"
@@ -22,7 +22,7 @@ public:
 
     void update_all();
     void render_all();
-    void place_block(int id, int x, int y);
+    void place_block(std::string id, int x, int y);
     void destroy_block(int x, int y);
     void generate_chunk();
 

@@ -63,7 +63,7 @@ void Chunk_Group::check_area(int x, int y) {
 #endif
     
     int id = 0;
-    id = ceil((x) / (8 * block_w));
+    id = ceil((x) / (8 * constants::block_w));
 
     // Unload old chunks
     if (loaded_chunks.size() > load_distance) {
@@ -102,7 +102,7 @@ void Chunk_Group::sort_all() {
 
 Chunk* Chunk_Group::get_chunk_at(int x) {
     int id = 0;
-    id = ceil((x*block_w) / (8 * block_w));
+    id = ceil((x*constants::block_w) / (8 * constants::block_w));
 
     std::vector<int>::iterator hovered_chunk = std::find(loaded_chunks.begin(), loaded_chunks.end(), id);
 
@@ -115,7 +115,7 @@ Chunk* Chunk_Group::get_chunk_at(int x) {
 
 int Chunk_Group::get_id(int surrounding) {
     double id = 0;
-    id = ceil((camera->get_x() - (camera->get_width()/2))  / (surrounding * block_w));
+    id = ceil((camera->get_x() - (camera->get_width()/2))  / (surrounding * constants::block_w));
     if (id > 0) {
         id *= -1;
     } else {

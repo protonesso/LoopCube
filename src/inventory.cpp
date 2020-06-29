@@ -43,7 +43,7 @@ void Inventory::draw_inventory_menu() {
         SDL_RenderFillRect(renderer, &shadow);
 
         // Render inventory menu
-        SDL_RenderCopy(renderer, textures->get_texture(sprite_start+7), &src, &dest);
+        SDL_RenderCopy(renderer, textures->get_texture(11), &src, &dest);
 
         std::vector<int> pos = get_hovered_pos(events->get_mouse_pos()[0], events->get_mouse_pos()[1], MAX_X, MAX_Y, true);
     }
@@ -114,6 +114,6 @@ void Inventory::draw_hotbar() {
             src.y = 16;
         }
         SDL_Rect block{i*(BLOCK_S+3)+MAX_X, 2, BLOCK_S, BLOCK_S};
-        SDL_RenderCopy(renderer, textures->get_texture(sprite_start+6), &src, &block);
+        SDL_RenderCopy(renderer, textures->get_texture(10), &src, &block);
     }
 }

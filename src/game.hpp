@@ -7,7 +7,7 @@
 #include <string>
 #include <vector>
 
-#include "blockids.hpp"
+#include "constants.hpp"
 #include "texturehandler.hpp"
 #include "eventhandler.hpp"
 #include "play.hpp"

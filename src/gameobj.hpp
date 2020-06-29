@@ -4,7 +4,7 @@
 #include <string>
 
 #include "texturehandler.hpp"
-#include "blockids.hpp"
+#include "constants.hpp"
 #include "position.hpp"
 #include "camera.hpp"
 

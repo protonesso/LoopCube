@@ -2,9 +2,14 @@
 
 Block::Block() {}
 
-Block::Block(int id, TextureHandler &textures, SDL_Renderer* renderer, Camera &camera, int x, int y)
-    : Game_Object{id, textures, renderer, camera, (double)x, (double)y, block_w, block_h} {
-    this->id = id;
+Block::Block(std::string id, TextureHandler &textures, SDL_Renderer* renderer, Camera &camera, int x, int y)
+    : Game_Object{0, textures, renderer, camera, (double)x, (double)y, constants::block_w, constants::block_h} {
+
+    for (auto &i: constants::block_info) {
+        if (i.get_id() == id) {
+            this->texture_id = i.get_texture_id();
+        }
+    }
 }
 
 double Block::get_x() const {

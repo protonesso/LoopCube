@@ -9,7 +9,7 @@
 #include <cmath>
 #include <ctime>
 
-#include "blockids.hpp"
+#include "constants.hpp"
 #include "texturehandler.hpp"
 #include "camera.hpp"
 #include "eventhandler.hpp"

@@ -58,7 +58,7 @@ void Menu::render_background() {
             SDL_Rect src{0, 0, 16, 16};
 
             // Draw the tile
-            SDL_RenderCopy(renderer, textures->get_texture(sprite_start+4), &src, &block);
+            SDL_RenderCopy(renderer, textures->get_texture(2), &src, &block);
         }
     }
 }

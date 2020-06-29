@@ -4,17 +4,15 @@
 TextureHandler::TextureHandler(SDL_Renderer* renderer) {
     this->renderer = renderer;
 
-    for (auto &i: ids) {
-        std::string is_entity_path = "";
-        // Check if this is a sprite
-        if (i.first >= sprite_start) {
-            is_entity_path = "sprites/";
-        }
-        textures.push_back(std::make_pair(i.first, Texture{renderer, path+is_entity_path+i.second+".png"}));
+    for (int i = 0; i < constants::texture_ids.size(); ++i) {
+        textures.push_back(std::make_pair(i, 
+            Texture{renderer, constants::path + constants::texture_ids[i] + ".png"}
+        ));
     }
 }
 
-TextureHandler::~TextureHandler() {}
+TextureHandler::~TextureHandler() {
+}
 
 void TextureHandler::free_textures() {
     for (auto &i: textures) {

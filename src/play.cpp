@@ -110,8 +110,8 @@ void Play::render() {
 // Draw a selection box and set p1 and p2 to the position
 // Perhaps we should rename this to get_selection and seperate rendering functions?
 void Play::draw_selection(int* p1, int* p2) {
-    int b_w = static_cast<int>(block_w);
-    int b_h = static_cast<int>(block_h);
+    int b_w = static_cast<int>(constants::block_w);
+    int b_h = static_cast<int>(constants::block_h);
 
     auto mpos = events->get_mouse_pos();
 
@@ -153,8 +153,8 @@ void Play::draw_debug_menu() {
         +" for PC",
 #endif
         "= Player =",
-        "X: " + std::to_string(player.get_default_x() / block_w)
-            + " / Y: " + std::to_string(player.get_default_y() / block_h),
+        "X: " + std::to_string(player.get_default_x() / constants::block_w)
+            + " / Y: " + std::to_string(player.get_default_y() / constants::block_h),
         // Chunk
         "= Chunk =",
         "Pos: " + std::to_string(chunks.get_id()),

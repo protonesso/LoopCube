@@ -14,6 +14,7 @@ public:
     void listen();
 
     std::vector<int> get_state();
+    std::vector<int> get_button_state();
     std::vector<SDL_Scancode> get_keys_set();
     std::array<int, 2> get_mouse_pos();
     int get_mouse_down();
@@ -34,6 +35,10 @@ private:
     */
     std::vector<SDL_Scancode> keys_set;
     std::vector<int> state;
+
+
+    std::vector<SDL_GameControllerButton> buttons_set;
+    std::vector<int> button_state;
 
     int mouse_x;
     int mouse_y;

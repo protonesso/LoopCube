@@ -100,6 +100,15 @@ void Game::init(bool fullscreen = false) {
         std::cerr << "[SDL] ERROR: Failed to initialize SDL!" << std::endl;
     }
 
+    // Check Joysticks
+    for (int i = 0; i < SDL_NumJoysticks(); ++i) {
+        if (SDL_JoystickOpen(i) == NULL) {
+            std::cout << "Warning: Unable to open game controller" << std::endl;
+        } else {
+            std::cout << "Controller registered!" << std::endl;
+        }
+    }
+
 
     // Todo check error
     IMG_Init(IMG_INIT_PNG);

@@ -3,10 +3,11 @@
     <name>LoopCube</name>
     <coder>NekoBit</coder>
     <version>0.1</version>
+    <short_description>Survival/Sandbox Game</short_description>
     <long_description>This is an official port of LoopCube by NekoBit.
     LoopCube is a game written in C++ that utilizes the SDL2 Library.
 
-    Supports: Keyboard / Mouse.
+    Supports: GamePad
 
     Source Code => github.com/nek0bit/LoopCube</long_description> 
 </app>

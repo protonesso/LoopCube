@@ -43,6 +43,34 @@ void Play::update() {
         }
     }
 
+    // Jump (A)
+    if (events->get_button_state()[4]) {
+        player.direct_player(0, chunks);
+    }
+
+    // Down
+    if (events->get_button_state()[0]) {
+        player.direct_player(2, chunks);
+    }
+
+    // Right
+    if (events->get_button_state()[1]) {
+        player.direct_player(1, chunks);
+    }
+
+    // Left
+    if (events->get_button_state()[2]) {
+        player.direct_player(3, chunks);
+    }
+
+    // Up
+    if (events->get_button_state()[3]) {
+        player.direct_player(0, chunks);
+    }
+
+
+    
+
 
     // Update camera
     handle_camera();
@@ -76,7 +104,7 @@ void Play::render() {
 
     inv->draw_inventory_menu();
 
-    if (!inv->get_inventory_visibility()) draw_debug_menu();
+    //if (!inv->get_inventory_visibility()) draw_debug_menu();
 }
 
 // Draw a selection box and set p1 and p2 to the position

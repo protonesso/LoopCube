@@ -29,7 +29,7 @@ void Play::print_mouse_pos() {
 void Play::update() {
     // Update all chunks
     chunks.update_all();
-    chunks.check_area();
+    chunks.check_area(player.get_default_x(), player.get_default_y());
 
     // Update player
     player.update(chunks);
@@ -111,9 +111,19 @@ void Play::handle_camera() {
 
 
 void Play::draw_debug_menu() {
+    SDL_version compiled;
+    SDL_GetVersion(&compiled);
+
     std::vector<std::string> dbg_text = {
         "[[ DEBUG ]]",
         // Player
+        "Built: At "+ std::string(__TIME__)+" "+std::string(__DATE__)+" C++"+std::to_string(__cplusplus)
+            +" SDL"+std::to_string(compiled.major)+"."+ std::to_string(compiled.minor)+"."+ std::to_string(compiled.patch)
+#ifdef __WIIU__
+        +" For Wii U",
+#else
+        +" for PC",
+#endif
         "= Player =",
         "X: " + std::to_string(player.get_default_x() / block_w)
             + " / Y: " + std::to_string(player.get_default_y() / block_h),

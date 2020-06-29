@@ -3,6 +3,7 @@
 #include <vector>
 #include <cmath>
 #include <algorithm>
+#include <iostream>
 
 #include "chunk.hpp"
 #include "blockids.hpp"
@@ -16,7 +17,7 @@ public:
     ~Chunk_Group();
 
     void generate_chunk(int id);
-    void check_area();
+    void check_area(int x, int y);
     void render_all();
     void update_all();
 

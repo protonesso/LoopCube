@@ -55,23 +55,22 @@ void Chunk_Group::generate_chunk(int id) {
     }
 }
 
-void Chunk_Group::check_area() {
-    // I forgot what this does but it is used for something
-    const int surrounding = 8; // (is this chunk loading distance?)
-
-    double id = get_id(surrounding);
+void Chunk_Group::check_area(int x, int y) {
+#ifdef __WIIU__
+    const int load_distance = 2;
+#else
+    const int load_distance = 8;
+#endif
+    
+    int id = 0;
+    id = ceil((x) / (8 * block_w));
 
     // Unload old chunks
-
-    if (loaded_chunks.size() > (surrounding*2)+5) {
-        // Because loaded_chunk is just integers based off of chunks and same with past_chunks
-        // We need to sort all of them so we can access values from them by the same index
-        sort_all();
-
+    if (loaded_chunks.size() > load_distance) {
         // Unloaded chunks off of rightside of screen
         /* We basically just move the chunk from group to group_past
            Since we want to reload these chunks when the screen gets back in view */
-        if (id-surrounding-1 < loaded_chunks[0]) {
+        if (id-load_distance-1 < loaded_chunks[0]) {
             group_past.push_back(*(group.end()-1));
             past_chunks.push_back(*(loaded_chunks.end()-1));
 
@@ -81,7 +80,7 @@ void Chunk_Group::check_area() {
         }
 
         // Unload chunks from leftside of screen
-        if (id+surrounding > loaded_chunks[loaded_chunks.size()-1]) {
+        if (id+load_distance > loaded_chunks[loaded_chunks.size()-1]) {
             group_past.push_back(*(group.begin()));
             past_chunks.push_back(*(loaded_chunks.begin()));
             loaded_chunks.erase(loaded_chunks.begin());
@@ -89,7 +88,7 @@ void Chunk_Group::check_area() {
         }
     }
 
-    for (int i = surrounding*-1; i < surrounding; ++i) {
+    for (int i = load_distance*-1; i < load_distance; ++i) {
         generate_chunk(id+i);
     }
 }
@@ -116,7 +115,7 @@ Chunk* Chunk_Group::get_chunk_at(int x) {
 
 int Chunk_Group::get_id(int surrounding) {
     double id = 0;
-    id = ceil(camera->get_x() / (surrounding * block_w));
+    id = ceil((camera->get_x() - (camera->get_width()/2))  / (surrounding * block_w));
     if (id > 0) {
         id *= -1;
     } else {

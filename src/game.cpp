@@ -26,6 +26,7 @@ void Game::game_init() {
     textures = TextureHandler(renderer);
     //game = new Play(renderer, textures, events, WINDOW_W, WINDOW_H);
     menu = new Menu(renderer, textures, events, &WINDOW_W, &WINDOW_H, {"Play", "About", "Settings", "Exit"});
+    state.set(STATE_PLAYING);
 }
 
 // Game related loop stuff
@@ -81,6 +82,9 @@ void Game::render() {
 void Game::init(bool fullscreen = false) {
     // Handle flags
     int flags = 0;
+#ifdef __WIIU__
+    fullscreen = true;
+#endif
     if (fullscreen) {
         flags = SDL_WINDOW_FULLSCREEN;
     }

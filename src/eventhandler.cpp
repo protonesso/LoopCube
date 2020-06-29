@@ -24,15 +24,11 @@ void EventHandler::listen() {
         }
     }
 
-    static int last_axis{0};
-    static int last_value{0};
-
-    if (last_axis == 0) {
-        mouse_x += last_value / 2048;
+    if (mouse_x < 0) {
+        mouse_x = 1;
     }
-
-    if (last_axis == 1) {
-        mouse_y += last_value / 2048;
+    if (mouse_y < 0) {
+        mouse_y = 1;
     }
 
     while (SDL_PollEvent(&event)) {
@@ -79,17 +75,15 @@ void EventHandler::listen() {
                 quit = true;
                 break;
             case SDL_JOYAXISMOTION:
-                if (event.jaxis.value < 10 || event.jaxis.value > 10) {
+                if (event.jaxis.value < 3000 || event.jaxis.value > 3000) {
                     //Horizontal
                     if(event.jaxis.axis == 0) {
-                        last_axis = event.jaxis.axis;
-                        last_value = event.jaxis.value;
+                        mouse_x += event.jaxis.value / 2048;
                     }
 
                     //Verticle
                     if(event.jaxis.axis == 1) {
-                        last_axis = event.jaxis.axis;
-                        last_value = event.jaxis.value;
+                        mouse_y += event.jaxis.value / 2048;
                     }
                 }
                 break;
@@ -110,9 +104,9 @@ void EventHandler::listen() {
                 for (auto i = 0; i < buttons_set.size(); ++i) {
                     if (event.jbutton.button == buttons_set[i]) {
                         button_state[i] = 0;
-                    }
-                    if (i == 6) {
-                        mouse_down = 0;
+                        if (i == 6) {
+                            mouse_down = 0;
+                        }
                     }
                 }
                 break;

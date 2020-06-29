@@ -26,7 +26,6 @@ void Game::game_init() {
     textures = TextureHandler(renderer);
     //game = new Play(renderer, textures, events, WINDOW_W, WINDOW_H);
     menu = new Menu(renderer, textures, events, &WINDOW_W, &WINDOW_H, {"Play", "About", "Settings", "Exit"});
-    state.set(STATE_PLAYING);
 }
 
 // Game related loop stuff
@@ -73,6 +72,17 @@ void Game::render() {
     if (state == STATE_PLAYING) {
         game->render();
     }
+    
+#ifdef __WIIU__
+    SDL_Rect cursor_hover;
+    cursor_hover.x = events.get_mouse_pos()[0];
+    cursor_hover.y = events.get_mouse_pos()[1];
+    cursor_hover.w = 10;
+    cursor_hover.h = 10;
+
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 200);
+    SDL_RenderFillRect(renderer, &cursor_hover);
+#endif
 
     SDL_RenderPresent(renderer);
 }

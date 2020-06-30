@@ -18,6 +18,7 @@ Inventory::~Inventory() {
 }
 
 void Inventory::add_item(std::string id) {
+    // TODO Optimize this
     int found = -1;
     int max_count = 99;
     
@@ -66,6 +67,10 @@ void Inventory::update() {
     }
 
     if (events->get_state()[4]) {
+        show_inventory_menu = !show_inventory_menu;
+    }
+
+    if (events->get_button_state()[8]) {
         show_inventory_menu = !show_inventory_menu;
     }
 }

@@ -28,6 +28,8 @@ Text::~Text() {
 
 void Text::set_text(std::string text) {
     this->text = text;
+    SDL_FreeSurface(surface);
+    SDL_DestroyTexture(messageText);
     surface = TTF_RenderText_Blended(this->font, text.c_str(), color);
     messageText = SDL_CreateTextureFromSurface(renderer, surface);
 }

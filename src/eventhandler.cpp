@@ -7,7 +7,8 @@ EventHandler::EventHandler()
         SDL_SCANCODE_6, SDL_SCANCODE_7, SDL_SCANCODE_8,
         SDL_SCANCODE_9, SDL_SCANCODE_0, SDL_SCANCODE_F8},
         buttons_set{SDL_CONTROLLER_BUTTON_MAX, SDL_CONTROLLER_BUTTON_DPAD_RIGHT, SDL_CONTROLLER_BUTTON_DPAD_DOWN,
-        SDL_CONTROLLER_BUTTON_DPAD_LEFT, SDL_CONTROLLER_BUTTON_X, SDL_CONTROLLER_BUTTON_START, SDL_CONTROLLER_BUTTON_LEFTSHOULDER, SDL_CONTROLLER_BUTTON_RIGHTSHOULDER},
+        SDL_CONTROLLER_BUTTON_DPAD_LEFT, SDL_CONTROLLER_BUTTON_X, SDL_CONTROLLER_BUTTON_START, SDL_CONTROLLER_BUTTON_LEFTSHOULDER, SDL_CONTROLLER_BUTTON_RIGHTSHOULDER,
+        SDL_CONTROLLER_BUTTON_Y},
         mouse_down{0}, controller{NULL} {
     state.resize(keys_set.size());
     button_state.resize(buttons_set.size());
@@ -31,11 +32,18 @@ EventHandler::~EventHandler() {}
 
 void EventHandler::listen() {
     std::vector<int> exceptions{4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16};
+    std::vector<int> controller_exceptions{8};
 
     // Disable Exceptions
     for (auto exc: exceptions) {
         if (state[exc] == 1) {
             state[exc] = 0;
+        }
+    }
+
+    for (auto exc: controller_exceptions) {
+        if (button_state[exc] == 1) {
+            button_state[exc] = 0;
         }
     }
 

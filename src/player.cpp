@@ -38,6 +38,7 @@ void Player::jump(Chunk_Group &chunks) {
 void Player::direct_player(int direction, Chunk_Group &chunks) {
     switch (direction) {
         case 0: // UP
+            // TODO Optimize this, game checks for jumps repeatedly when held
             jump(chunks);
             break;
         case 1: // RIGHT

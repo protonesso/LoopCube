@@ -116,9 +116,16 @@ void Game::init(bool fullscreen = false) {
     IMG_Init(IMG_INIT_PNG);
     TTF_Init();
 
+    initialize_fonts();
+
     game_init();
 
     is_running = true;
+}
+
+void Game::initialize_fonts() {
+    constants::button_font = TTF_OpenFont("data/fonts/liberation-sans/LiberationSans-Regular.ttf", 26);
+    constants::item_font = TTF_OpenFont("data/fonts/liberation-sans/LiberationSans-Regular.ttf", 12);
 }
 
 // Handles events such as exit, keypresses, mouse

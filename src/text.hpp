@@ -9,9 +9,8 @@ class Text {
 public:
     Text(SDL_Renderer* renderer,
         std::string text,
-        SDL_Color color, 
-        int font_size = 12, 
-        const char* font = "data/fonts/liberation-sans/LiberationSans-Regular.ttf");
+        SDL_Color color,
+        TTF_Font* font);
     ~Text();
 
     void draw(int x, int y);

@@ -65,8 +65,8 @@ void Chunk::destroy_block(int x, int y, Inventory *inv) {
         if (get_chunk_x(x) == i->get_default_x() && y == i->get_default_y()) {
 
             // Get blockinfo
-            BlockInfo info = i->get_blockinfo();
-            inv->add_item(std::string(info.get_id()));
+            const BlockInfo* info = i->get_blockinfo();
+            inv->add_item(std::string(info->get_id()));
             
             chunk.erase(i);
             break;

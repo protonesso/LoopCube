@@ -12,7 +12,7 @@ Text::Text(SDL_Renderer* renderer,
         std::cerr << "[ERROR] TTF_OpenFont: " << TTF_GetError() << std::endl;
         throw "Fuck";
     }
-    #ifdef __WIIU__
+    #ifdef __LOWENDDEVICE__
         surface = TTF_RenderText_Solid(this->font, text.c_str(), color);
     #else
         surface = TTF_RenderText_Blended(this->font, text.c_str(), color);

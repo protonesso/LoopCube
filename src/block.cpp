@@ -8,7 +8,7 @@ Block::Block(std::string id, TextureHandler &textures, SDL_Renderer* renderer, C
     for (auto &i: constants::block_info) {
         if (i.get_id() == id) {
             this->texture_id = i.get_texture_id();
-            this->blockinfo = i;
+            this->blockinfo = &i;
         }
     }
 }
@@ -22,7 +22,7 @@ double Block::get_y() const {
 
 }
 
-BlockInfo Block::get_blockinfo() {
+const BlockInfo* Block::get_blockinfo() {
     return blockinfo;
 }
 

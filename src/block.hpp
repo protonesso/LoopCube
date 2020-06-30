@@ -13,11 +13,11 @@ public:
     void update();
     void render();
     void render_shadow();
-    BlockInfo get_blockinfo();
+    const BlockInfo* get_blockinfo();
     double get_x() const override;
     double get_y() const override;
 private:
-    BlockInfo blockinfo;
+    const BlockInfo *blockinfo;
 };
 
 

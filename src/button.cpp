@@ -77,7 +77,9 @@ void Button::set_text(std::string text) {
     color.g = 255;
     color.b = 255;
     color.a = 255;
-    button_text = new Text(renderer, this->text, color, 26);
+    std::cout << "Before crash" << std::endl;
+    std::cout << constants::button_font << std::endl;
+    button_text = new Text(renderer, this->text, color, constants::button_font);
 }
 
 void Button::set_x(int x) {

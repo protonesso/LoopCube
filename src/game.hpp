@@ -29,6 +29,7 @@ public:
     void free();
 private:
     const char* title;
+    void initialize_fonts();
 #ifdef __WIIU__
     int WINDOW_W = 1920;
     int WINDOW_H = 1080;

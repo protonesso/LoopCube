@@ -11,7 +11,7 @@ Item::Item(std::string id, TextureHandler &textures, SDL_Renderer *renderer) : c
 
     SDL_Color color{};
     color.r = 255; color.g = 255; color.b = 255;
-    text = new Text(renderer, "", color, 12);
+    text = new Text(renderer, "", color, constants::item_font);
 }
 
 Item::~Item() {}

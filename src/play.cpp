@@ -138,7 +138,7 @@ void Play::handle_camera() {
     camera.set_pos(x, y);
 }
 
-
+/*
 void Play::draw_debug_menu() {
     SDL_version compiled;
     SDL_GetVersion(&compiled);
@@ -168,7 +168,8 @@ void Play::draw_debug_menu() {
     color.r = 255; color.g = 255; color.b = 255;
     int size = 14;
     for (size_t i = 0; i < dbg_text.size(); ++i) {
-        Text dtext{renderer, dbg_text[i], color, size};
+        Text dtext{renderer, dbg_text[i], color, };
         dtext.draw(0,i*size);
     }
 }
+*/

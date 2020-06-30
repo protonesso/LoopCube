@@ -5,6 +5,7 @@
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
+#include "constants.hpp"
 #include "texturehandler.hpp"
 #include "text.hpp"
 #include "aabb.hpp"

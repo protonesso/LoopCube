@@ -3,14 +3,12 @@
 Text::Text(SDL_Renderer* renderer,
         std::string text, 
         SDL_Color color,
-        int font_size, 
-        const char* font)
+        TTF_Font* font)
     :  text{text}, color{color}, renderer{renderer} {
-    this->font = TTF_OpenFont(font, font_size);
+    this->font = font;
 
     if (this->font == NULL) {
         std::cerr << "[ERROR] TTF_OpenFont: " << TTF_GetError() << std::endl;
-        throw "Fuck";
     }
     #ifdef __LOWENDDEVICE__
         surface = TTF_RenderText_Solid(this->font, text.c_str(), color);
@@ -22,7 +20,6 @@ Text::Text(SDL_Renderer* renderer,
 
 Text::~Text() {
     SDL_FreeSurface(surface);
-    TTF_CloseFont(font);
     SDL_DestroyTexture(messageText);
 }
 

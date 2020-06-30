@@ -11,6 +11,20 @@ EventHandler::EventHandler()
         mouse_down{0} {
     state.resize(keys_set.size());
     button_state.resize(buttons_set.size());
+
+}
+
+void EventHandler::open_controllers() {
+
+    // Check Joysticks
+    for (int i = 0; i < SDL_NumJoysticks(); ++i) {
+        this->controller = SDL_JoystickOpen(i);
+        if (this->controller == NULL) {
+            std::cout << "Warning: Unable to open game controller" << std::endl;
+        } else {
+            std::cout << "Controller registered!" << std::endl;
+        }
+    }
 }
 
 EventHandler::~EventHandler() {}
@@ -30,6 +44,18 @@ void EventHandler::listen() {
     }
     if (mouse_y < 0) {
         mouse_y = 1;
+    }
+
+    // Left Joystick
+    if (controller != NULL) {
+        auto axis_hor = SDL_JoystickGetAxis(controller, 2);
+        auto axis_ver = SDL_JoystickGetAxis(controller, 3);
+
+        int deadzone = 3000;
+        if (axis_hor < deadzone || axis_hor > deadzone || axis_ver < deadzone || axis_ver > deadzone) {
+            mouse_x += axis_hor / 2048;
+            mouse_y += axis_ver / 2048;
+        }
     }
 
     while (SDL_PollEvent(&event)) {
@@ -54,7 +80,6 @@ void EventHandler::listen() {
             }
         }
 
-
         switch(event.type) {
             case SDL_KEYDOWN:
                 for (auto exc: exceptions) {
@@ -75,19 +100,6 @@ void EventHandler::listen() {
             case SDL_QUIT:
                 quit = true;
                 break;
-            case SDL_JOYAXISMOTION:
-                if (event.jaxis.value < 3000 || event.jaxis.value > 3000) {
-                    //Horizontal
-                    if(event.jaxis.axis == 0) {
-                        mouse_x += event.jaxis.value / 2048;
-                    }
-
-                    //Verticle
-                    if(event.jaxis.axis == 1) {
-                        mouse_y += event.jaxis.value / 2048;
-                    }
-                }
-                break;
             case SDL_JOYBUTTONDOWN:
                 for (long unsigned int i = 0; i < buttons_set.size(); ++i) {
                     if (event.jbutton.button == buttons_set[i]) {
@@ -102,7 +114,7 @@ void EventHandler::listen() {
                 }
                 break;
             case SDL_JOYBUTTONUP:
-                for (long unsigned int i = 0; i < buttons_set.size(); ++i) {
+                for (auto i = 0; i < buttons_set.size(); ++i) {
                     if (event.jbutton.button == buttons_set[i]) {
                         button_state[i] = 0;
                         if (i == 6) {

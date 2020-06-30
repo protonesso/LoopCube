@@ -15,6 +15,7 @@ public:
     ~Text();
 
     void draw(int x, int y);
+    void set_text(std::string text);
 private:
     std::string text;
 

@@ -9,6 +9,7 @@
 #include "eventhandler.hpp"
 #include "constants.hpp"
 #include "position.hpp"
+#include "item.hpp"
 
 
 class Inventory {
@@ -35,6 +36,8 @@ private:
     bool collision(int, int, int, int, int, int, int, int);
 
     std::vector<int> slots;
+
+    std::vector<Item*> items;
 
     int* WINDOW_W;
     int* WINDOW_H;

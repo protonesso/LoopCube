@@ -26,6 +26,12 @@ Text::~Text() {
     SDL_DestroyTexture(messageText);
 }
 
+void Text::set_text(std::string text) {
+    this->text = text;
+    surface = TTF_RenderText_Blended(this->font, text.c_str(), color);
+    messageText = SDL_CreateTextureFromSurface(renderer, surface);
+}
+
 void Text::draw(int x, int y) {
     int w, h;
     TTF_SizeText(font, text.c_str(), &w, &h);

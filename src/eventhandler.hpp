@@ -19,6 +19,7 @@ public:
     std::array<int, 2> get_mouse_pos();
     int get_mouse_down();
     SDL_Event get_event();
+    void open_controllers();
 
     bool get_quit();
 
@@ -43,6 +44,8 @@ private:
     int mouse_x;
     int mouse_y;
     int mouse_down;
+
+    SDL_Joystick* controller;
 
     SDL_Event event;
 };

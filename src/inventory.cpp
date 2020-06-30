@@ -9,6 +9,11 @@ Inventory::Inventory(SDL_Renderer* renderer,
     this->renderer = renderer;
     this->textures = &textures;
     this->events = &events;
+
+    items.resize(max_slots, nullptr);
+    items[2] = new Item("grass", textures, renderer);
+
+    items[hotbar_slots*4+2] = new Item("stone", textures, renderer);
 }
 
 Inventory::~Inventory() {
@@ -30,7 +35,7 @@ void Inventory::update() {
 
 void Inventory::draw_inventory_menu() {
     if (show_inventory_menu) {
-        int scale = 3;
+        int scale = 3; // TODO Make this work properly
         const int MAX_X = (*WINDOW_W - (170*scale))/2;
         const int MAX_Y = (*WINDOW_H - (95*scale))/2;
         
@@ -46,6 +51,7 @@ void Inventory::draw_inventory_menu() {
         SDL_RenderCopy(renderer, textures->get_texture(11), &src, &dest);
 
         std::vector<int> pos = get_hovered_pos(events->get_mouse_pos()[0], events->get_mouse_pos()[1], MAX_X, MAX_Y, true);
+
     }
 }
 
@@ -60,6 +66,8 @@ std::vector<int> Inventory::get_hovered_pos(int x, int y, int corner_x, int corn
     const int sp_gap = 8;
     int total = max_slots/10;
 
+    std::vector<int> returner;
+
     
     // Loop through slots
     for (int i = 0; i < hotbar_slots; ++i) {
@@ -68,6 +76,11 @@ std::vector<int> Inventory::get_hovered_pos(int x, int y, int corner_x, int corn
 
             int new_x = corner_x+(i*(tile_size+sp_gap)+sx_gap);
             int new_y = corner_y+(j*(tile_size+sp_gap)+sy_gap);
+
+            // Draw item
+            if (items[i+(j*hotbar_slots)] != nullptr) {
+                items[i+(j*hotbar_slots)]->draw(new_x+5, new_y+5, tile_size-10, tile_size-10);
+            }
 
             if (collision(x, y, 1, 1,
                 new_x, new_y, tile_size, tile_size)) {
@@ -78,13 +91,15 @@ std::vector<int> Inventory::get_hovered_pos(int x, int y, int corner_x, int corn
                     SDL_RenderFillRect(renderer, &rect);
                 }
 
-                return std::vector<int>{i, j};
+                returner = {i, j};
             }
         }
     }
 
-    
-    
+    if (returner.size() == 2) {
+        return returner;
+    }
+
     return std::vector<int>{-1, -1};
 }
 
@@ -115,5 +130,9 @@ void Inventory::draw_hotbar() {
         }
         SDL_Rect block{i*(BLOCK_S+3)+MAX_X, 2, BLOCK_S, BLOCK_S};
         SDL_RenderCopy(renderer, textures->get_texture(10), &src, &block);
+
+        if (items[(hotbar_slots*4)+i] != nullptr) {
+            items[(hotbar_slots*4)+i]->draw(block.x+5, block.y+5, 30, 30);
+        }
     }
 }

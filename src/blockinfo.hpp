@@ -5,6 +5,7 @@
 
 class BlockInfo {
 public:
+    BlockInfo() = default;
     BlockInfo(std::string id, std::string name, int texture_id);
     ~BlockInfo();
 

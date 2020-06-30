@@ -4,7 +4,7 @@
 TextureHandler::TextureHandler(SDL_Renderer* renderer) {
     this->renderer = renderer;
 
-    for (int i = 0; i < constants::texture_ids.size(); ++i) {
+    for (size_t i = 0; i < constants::texture_ids.size(); ++i) {
         textures.push_back(std::make_pair(i, 
             Texture{renderer, constants::path + constants::texture_ids[i] + ".png"}
         ));

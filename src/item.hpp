@@ -15,6 +15,8 @@ public:
 
     void draw(int x, int y, int width, int height);
     void add_count();
+    int get_count();
+    BlockInfo get_block();
 private:
     Text* text;
     std::string id;

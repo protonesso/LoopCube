@@ -60,11 +60,14 @@ void Chunk::generate_chunk() {
 
 }
 
-void Chunk::destroy_block(int x, int y) {
-    bool exists = false;
+void Chunk::destroy_block(int x, int y, Inventory *inv) {
     for (auto i = chunk.begin(); i < chunk.end(); ++i) {
         if (get_chunk_x(x) == i->get_default_x() && y == i->get_default_y()) {
-            exists = true;
+
+            // Get blockinfo
+            BlockInfo info = i->get_blockinfo();
+            inv->add_item(std::string(info.get_id()));
+            
             chunk.erase(i);
             break;
         }

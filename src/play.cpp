@@ -29,7 +29,7 @@ void Play::print_mouse_pos() {
 void Play::update() {
     // Update all chunks
     chunks.update_all();
-    chunks.check_area(player.get_default_x(), player.get_default_y());
+    chunks.check_area(player.get_default_x());
 
     // Update player
     player.update(chunks);
@@ -96,7 +96,7 @@ void Play::render() {
         // Do some math to get the chunk position
         int chunk_pos = std::abs(p1-(chunk->get_slot()*8));
         if (events->get_mouse_down()) {
-            chunk->destroy_block(chunk_pos, p2);
+            chunk->destroy_block(chunk_pos, p2, inv);
         }
     }
 

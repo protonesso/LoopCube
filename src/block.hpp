@@ -2,6 +2,7 @@
 #define BLOCK_HPP
 #include "gameobj.hpp"
 #include "constants.hpp"
+#include "blockinfo.hpp"
 
 class Block: public Game_Object {
 
@@ -12,8 +13,11 @@ public:
     void update();
     void render();
     void render_shadow();
+    BlockInfo get_blockinfo();
     double get_x() const override;
     double get_y() const override;
+private:
+    BlockInfo blockinfo;
 };
 
 

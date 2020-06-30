@@ -11,13 +11,50 @@ Inventory::Inventory(SDL_Renderer* renderer,
     this->events = &events;
 
     items.resize(max_slots, nullptr);
-    items[2] = new Item("grass", textures, renderer);
-
-    items[hotbar_slots*4+2] = new Item("stone", textures, renderer);
 }
 
 Inventory::~Inventory() {
 
+}
+
+void Inventory::add_item(std::string id) {
+    int found = -1;
+    int max_count = 99;
+    
+    // Search for slot
+    // This loop just loops through all the items, but in a certain order.
+
+    // For better explanation, it sorts like this
+    //===========
+    //===========  = is future slots to check
+    //===========  # is slot checked
+    //111213=====  (slot count isn't accurate in the example)
+    //12345678910
+
+    for (int j = (max_slots/10)-1; j >= 0; --j) {
+        for (int i = 0; i < hotbar_slots; ++i) {
+            if (items[i+(j*hotbar_slots)] != NULL) {
+                if (items[i+(j*hotbar_slots)]->get_block().get_id() == id) {
+                    if (items[i+(j*hotbar_slots)]->get_count() < max_count) {
+                        found = i+(j*hotbar_slots);
+                    }
+                }
+            }
+        }
+    }
+    if (found != -1) {
+        items[found]->add_count();
+    } else {
+        for (int j = (max_slots/10); j >= 0; --j) {
+            for (int i = 0; i < hotbar_slots; ++i) {
+                if (items[i+(j*hotbar_slots)] == nullptr) {
+                    items[i+(j*hotbar_slots)] = new Item(id, *textures, renderer);
+                    goto end;
+                }
+            }
+        }
+        end: return;
+    }
 }
 
 void Inventory::update() {

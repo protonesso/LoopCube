@@ -16,6 +16,14 @@ Item::Item(std::string id, TextureHandler &textures, SDL_Renderer *renderer) : c
 
 Item::~Item() {}
 
+int Item::get_count() {
+    return count;
+}
+
+BlockInfo Item::get_block() {
+    return block;
+}
+
 void Item::add_count() {
     count++;
     text->set_text(count == 0 ? "" : std::to_string(count).c_str());

@@ -1,6 +1,7 @@
 #ifndef CHUNK_HPP
 #define CHUNK_HPP
 #include <iostream>
+#include <string>
 #include <array>
 #include <cstdlib>
 #include <time.h>
@@ -10,6 +11,7 @@
 #include "block.hpp"
 #include "perlin.hpp"
 #include "camera.hpp"
+#include "inventory.hpp"
 #include "texturehandler.hpp"
 
 class Chunk {
@@ -23,7 +25,7 @@ public:
     void update_all();
     void render_all();
     void place_block(std::string id, int x, int y);
-    void destroy_block(int x, int y);
+    void destroy_block(int x, int y, Inventory *inv);
     void generate_chunk();
 
     int get_slot();

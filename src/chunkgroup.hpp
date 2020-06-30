@@ -17,7 +17,7 @@ public:
     ~Chunk_Group();
 
     void generate_chunk(int id);
-    void check_area(int x, int y);
+    void check_area(int x);
     void render_all();
     void update_all();
 

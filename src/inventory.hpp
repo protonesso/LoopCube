@@ -25,6 +25,7 @@ public:
     void draw_hotbar();
     void draw_inventory_menu();
     bool get_inventory_visibility();
+    void add_item(std::string id);
     void update();
 private:
     int hotbar_slots;

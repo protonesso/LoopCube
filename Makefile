@@ -1,10 +1,5 @@
-WINDOWS ?= 0
-CXXFLAGS=-g -Wall -Wextra -pipe -pedantic -ffunction-sections -O2
-ifeq ($(WINDOWS), 1)
-LDFLAGS=-lSDL2 -lSDL2_image -lSDL2_ttf -static-libgcc -static-libstdc++
-else
-LDFLAGS=-lSDL2 -lSDL2_image -lSDL2_ttf
-endif
+CXXFLAGS=-g -Wall -Wextra -pipe -pedantic -ffunction-sections
+LDFLAGS=-lSDL2 -lSDL2_image -lSDL2_ttf -O2
 CXX=g++
 TARGET=bin/LoopCube
 
@@ -19,5 +14,5 @@ obj/%.o: %.cpp %.hpp
 	$(CXX) -c -o $@ $< $(CXXFLAGS) $(LDFLAGS)
 
 clean:
-	rm $(TARGET)*
+	rm $(TARGET)
 	rm -rf obj/*

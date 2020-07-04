@@ -1,9 +1,5 @@
 #include "main.hpp"
-#ifdef _WIN32
-int WinMain() {
-#else
 int main() {
-#endif
     const int FPS = 60;
     const int frame_del = 1000 / FPS;
 
